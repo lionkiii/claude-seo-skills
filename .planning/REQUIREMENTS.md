@@ -67,11 +67,11 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Local Analysis Commands (New)
 
 - [x] **LOCAL-01**: `/seo markdown-audit <path>` — Audit markdown files for SEO before publishing (no MCP needed)
-- [ ] **LOCAL-02**: `/seo log-analysis <file>` — Server log analysis for crawl patterns
-- [ ] **LOCAL-03**: `/seo ai-content-check <url or file>` — AI content detection and authenticity optimization
-- [ ] **LOCAL-04**: `/seo internal-links <domain>` — Internal link structure analysis and optimization
-- [ ] **LOCAL-05**: `/seo local <business>` — Local SEO audit
-- [ ] **LOCAL-06**: `/seo migration-check <old> <new>` — Site migration SEO validator
+- [x] **LOCAL-02**: `/seo log-analysis <file>` — Server log analysis for crawl patterns
+- [x] **LOCAL-03**: `/seo ai-content-check <url or file>` — AI content detection and authenticity optimization
+- [x] **LOCAL-04**: `/seo internal-links <domain>` — Internal link structure analysis and optimization
+- [x] **LOCAL-05**: `/seo local <business>` — Local SEO audit
+- [x] **LOCAL-06**: `/seo migration-check <old> <new>` — Site migration SEO validator
 
 ## v2 Requirements
 
@@ -159,11 +159,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ORIG-10 | Phase 4 | Complete |
 | ORIG-11 | Phase 4 | Complete |
 | ORIG-12 | Phase 4 | Complete |
-| LOCAL-02 | Phase 4 | Pending |
-| LOCAL-03 | Phase 4 | Pending |
-| LOCAL-04 | Phase 4 | Pending |
-| LOCAL-05 | Phase 4 | Pending |
-| LOCAL-06 | Phase 4 | Pending |
+| LOCAL-02 | Phase 4 | Complete |
+| LOCAL-03 | Phase 4 | Complete |
+| LOCAL-04 | Phase 4 | Complete |
+| LOCAL-05 | Phase 4 | Complete |
+| LOCAL-06 | Phase 4 | Complete |
 
 **Coverage:**
 - v1 requirements: 48 total
