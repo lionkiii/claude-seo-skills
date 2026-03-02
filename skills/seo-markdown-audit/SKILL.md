@@ -23,7 +23,9 @@ Analyzes a local markdown file for SEO issues before publishing. No MCP connecti
 
 ## Execution
 
-Use the Read tool to load the file content, then run these 10 check categories:
+@skills/seo/references/markdown-guide.md
+
+Use the Read tool to load the file content, then run these 11 check categories:
 
 **1. Title / H1 Check**
 - Count lines starting with `# ` (H1) — flag if 0 or >1
@@ -80,12 +82,20 @@ Use the Read tool to load the file content, then run these 10 check categories:
 - Check for raw HTML (not recommended in markdown for SEO — search engines may not parse consistently)
 - Check for consecutive blank lines >2 (formatting issue)
 
+**11. Markdown Syntax Quality**
+Per Markdown Guide (https://www.markdownguide.org/) syntax best practices:
+- Space after heading hash: flag `#Heading` (missing space after `#`) — correct: `# Heading`
+- Consistent list delimiters: flag mixed `-` and `*` within the same list block — pick one delimiter and use it consistently throughout
+- Blank lines before/after headings: flag any heading that does not have a blank line above it (except the very first line of the file)
+- Blank lines before/after code blocks: flag fenced code blocks (` ``` `) that do not have a blank line immediately before and after them
+- Ordered list numbering: warn if ordered lists do not start at `1` (e.g., starting at `3`) — most Markdown renderers accept any number but starting at 1 is the standard
+
 ## Output Format
 
 ```
 ## Markdown SEO Audit: [filename]
 
-**Overall Score: X/10** (count of categories with no critical/high issues)
+**Overall Score: X/11** (count of categories with no critical/high issues)
 
 ### Critical Issues
 - [List of critical issues with line numbers if possible]
@@ -112,4 +122,5 @@ Use the Read tool to load the file content, then run these 10 check categories:
 | Images | PASS/WARN/FAIL | [count, alt text status] |
 | Frontmatter | PASS/WARN/FAIL | [fields present/missing] |
 | Technical | PASS/WARN/FAIL | [issues found] |
+| Markdown Syntax | PASS/WARN/FAIL | [issues found] |
 ```

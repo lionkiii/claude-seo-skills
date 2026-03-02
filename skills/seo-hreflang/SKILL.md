@@ -4,7 +4,9 @@ description: >
   Hreflang and international SEO audit, validation, and generation. Detects
   common mistakes, validates language/region codes, and generates correct
   hreflang implementations. Use when user says "hreflang", "i18n SEO",
-  "international SEO", "multi-language", "multi-region", or "language tags".
+  "international SEO", "multi-language", "multi-region", "language tags",
+  "language targeting", "country targeting", "x-default", "locale",
+  or "multilingual SEO".
 ---
 
 # Hreflang & International SEO

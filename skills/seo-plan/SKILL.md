@@ -4,7 +4,8 @@ description: >
   Strategic SEO planning for new or existing websites. Industry-specific
   templates, competitive analysis, content strategy, and implementation
   roadmap. Use when user says "SEO plan", "SEO strategy", "content strategy",
-  "site architecture", or "SEO roadmap".
+  "site architecture", "SEO roadmap", "keyword strategy", "content calendar",
+  "site architecture plan", "SEO budget", or "SEO timeline".
 ---
 
 # Strategic SEO Planning

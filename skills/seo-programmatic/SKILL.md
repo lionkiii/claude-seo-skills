@@ -5,7 +5,8 @@ description: >
   sources. Covers template engines, URL patterns, internal linking automation,
   thin content safeguards, and index bloat prevention. Use when user says
   "programmatic SEO", "pages at scale", "dynamic pages", "template pages",
-  "generated pages", or "data-driven SEO".
+  "generated pages", "data-driven SEO", "pSEO", "template engine",
+  "data-driven pages", "index bloat", or "thin content at scale".
 ---
 
 # Programmatic SEO Analysis & Planning

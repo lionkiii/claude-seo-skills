@@ -2,9 +2,10 @@
 name: seo-images
 description: >
   Image optimization analysis for SEO and performance. Checks alt text, file
-  sizes, formats, responsive images, lazy loading, and CLS prevention. Use when
-  user says "image optimization", "alt text", "image SEO", "image size",
-  or "image audit".
+  sizes, formats (WebP, AVIF), responsive images, lazy loading, CLS prevention,
+  and Core Web Vitals image impact. Use when user says "image optimization",
+  "alt text", "image SEO", "image size", "image audit", "WebP", "AVIF",
+  "lazy loading", "CLS", "responsive images", or "Core Web Vitals images".
 ---
 
 # Image Optimization Analysis

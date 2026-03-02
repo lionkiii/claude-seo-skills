@@ -4,7 +4,8 @@ description: >
   Generate SEO-optimized competitor comparison and alternatives pages. Covers
   "X vs Y" layouts, "alternatives to X" pages, feature matrices, schema markup,
   and conversion optimization. Use when user says "comparison page", "vs page",
-  "alternatives page", "competitor comparison", or "X vs Y".
+  "alternatives page", "competitor comparison", "X vs Y", "alternatives page",
+  "versus page", "comparison matrix", or "feature comparison".
 ---
 
 # Competitor Comparison & Alternatives Pages
