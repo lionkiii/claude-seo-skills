@@ -122,18 +122,6 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FOUND-04 | Phase 1 | Pending |
 | FOUND-05 | Phase 1 | Pending |
 | FOUND-06 | Phase 1 | Pending |
-| ORIG-01 | Phase 1 | Pending |
-| ORIG-02 | Phase 1 | Pending |
-| ORIG-03 | Phase 1 | Pending |
-| ORIG-04 | Phase 1 | Pending |
-| ORIG-05 | Phase 1 | Pending |
-| ORIG-06 | Phase 1 | Pending |
-| ORIG-07 | Phase 1 | Pending |
-| ORIG-08 | Phase 1 | Pending |
-| ORIG-09 | Phase 1 | Pending |
-| ORIG-10 | Phase 1 | Pending |
-| ORIG-11 | Phase 1 | Pending |
-| ORIG-12 | Phase 1 | Pending |
 | GSC-01 | Phase 2 | Pending |
 | GSC-02 | Phase 2 | Pending |
 | GSC-03 | Phase 2 | Pending |
@@ -143,33 +131,45 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GSC-07 | Phase 2 | Pending |
 | GSC-08 | Phase 2 | Pending |
 | GSC-09 | Phase 2 | Pending |
-| AHRF-01 | Phase 3 | Pending |
-| AHRF-02 | Phase 3 | Pending |
-| AHRF-03 | Phase 3 | Pending |
-| AHRF-04 | Phase 3 | Pending |
-| AHRF-05 | Phase 3 | Pending |
-| AHRF-06 | Phase 3 | Pending |
-| AHRF-07 | Phase 3 | Pending |
-| AHRF-08 | Phase 3 | Pending |
-| AHRF-09 | Phase 3 | Pending |
-| AHRF-10 | Phase 3 | Pending |
-| CROSS-01 | Phase 4 | Pending |
-| CROSS-02 | Phase 4 | Pending |
-| CROSS-03 | Phase 4 | Pending |
-| CROSS-04 | Phase 4 | Pending |
-| CROSS-05 | Phase 4 | Pending |
-| LOCAL-01 | Phase 5 | Pending |
-| LOCAL-02 | Phase 5 | Pending |
-| LOCAL-03 | Phase 5 | Pending |
-| LOCAL-04 | Phase 5 | Pending |
-| LOCAL-05 | Phase 5 | Pending |
-| LOCAL-06 | Phase 5 | Pending |
+| AHRF-01 | Phase 2 | Pending |
+| AHRF-02 | Phase 2 | Pending |
+| AHRF-03 | Phase 2 | Pending |
+| AHRF-04 | Phase 2 | Pending |
+| AHRF-05 | Phase 2 | Pending |
+| AHRF-06 | Phase 2 | Pending |
+| AHRF-07 | Phase 2 | Pending |
+| AHRF-08 | Phase 2 | Pending |
+| AHRF-09 | Phase 2 | Pending |
+| AHRF-10 | Phase 2 | Pending |
+| LOCAL-01 | Phase 2 | Pending |
+| CROSS-01 | Phase 3 | Pending |
+| CROSS-02 | Phase 3 | Pending |
+| CROSS-03 | Phase 3 | Pending |
+| CROSS-04 | Phase 3 | Pending |
+| CROSS-05 | Phase 3 | Pending |
+| ORIG-01 | Phase 4 | Pending |
+| ORIG-02 | Phase 4 | Pending |
+| ORIG-03 | Phase 4 | Pending |
+| ORIG-04 | Phase 4 | Pending |
+| ORIG-05 | Phase 4 | Pending |
+| ORIG-06 | Phase 4 | Pending |
+| ORIG-07 | Phase 4 | Pending |
+| ORIG-08 | Phase 4 | Pending |
+| ORIG-09 | Phase 4 | Pending |
+| ORIG-10 | Phase 4 | Pending |
+| ORIG-11 | Phase 4 | Pending |
+| ORIG-12 | Phase 4 | Pending |
+| LOCAL-02 | Phase 4 | Pending |
+| LOCAL-03 | Phase 4 | Pending |
+| LOCAL-04 | Phase 4 | Pending |
+| LOCAL-05 | Phase 4 | Pending |
+| LOCAL-06 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 48 total
 - Mapped to phases: 48
-- Unmapped: 0 ✓
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-02*
-*Last updated: 2026-03-02 after initial definition*
+*Last updated: 2026-03-02 — traceability updated to match 4-phase roadmap*
