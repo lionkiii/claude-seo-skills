@@ -10,7 +10,7 @@ description: >
   anchor-analysis, dr-history, top-pages. Cross-MCP: serp, content-brief, brand-radar,
   site-audit-pro, report. Local: log-analysis, ai-content-check, internal-links, local, migration-check.
   Triggers on: "SEO", "audit", "schema", "Core Web Vitals", "sitemap", "E-E-A-T", "AI Overviews",
-  "GEO", "technical SEO", "content quality", "page speed", "structured data", "GSC", "Ahrefs",
+  "GEO", "technical SEO", "content quality", "structured data", "GSC", "Ahrefs",
   "backlinks", "keywords", "search console", "domain rating", "local SEO", "migration".
 allowed-tools:
   - Read

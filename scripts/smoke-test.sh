@@ -218,10 +218,10 @@ echo ""
 echo "[ 5/5 ] Script Availability"
 
 SCRIPTS=(
-  "${SCRIPT_DIR}/fetch_page.py"
-  "${SCRIPT_DIR}/parse_html.py"
-  "${SCRIPT_DIR}/capture_screenshot.py"
-  "${SCRIPT_DIR}/analyze_visual.py"
+  "${SKILLS_SRC}/seo/scripts/fetch_page.py"
+  "${SKILLS_SRC}/seo/scripts/parse_html.py"
+  "${SKILLS_SRC}/seo/scripts/capture_screenshot.py"
+  "${SKILLS_SRC}/seo/scripts/analyze_visual.py"
 )
 
 for script in "${SCRIPTS[@]}"; do
