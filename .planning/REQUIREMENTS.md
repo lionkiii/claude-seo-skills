@@ -10,11 +10,11 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Foundation
 
 - [x] **FOUND-01**: Skill system installs correctly via install script to `~/.claude/skills/` and `~/.claude/agents/`
-- [ ] **FOUND-02**: Main orchestrator `seo/SKILL.md` routes all 27 commands correctly
-- [ ] **FOUND-03**: Reference files load on-demand (CWV thresholds, E-E-A-T framework, quality gates, schema types)
+- [x] **FOUND-02**: Main orchestrator `seo/SKILL.md` routes all 27 commands correctly
+- [x] **FOUND-03**: Reference files load on-demand (CWV thresholds, E-E-A-T framework, quality gates, schema types)
 - [x] **FOUND-04**: Python scripts (fetch_page, parse_html, capture_screenshot, analyze_visual) work correctly
-- [ ] **FOUND-05**: MCP graceful degradation — commands that require unavailable MCPs show clear error with fallback suggestions
-- [ ] **FOUND-06**: Ahrefs monetary values displayed in USD (divide cents by 100) via shared reference convention
+- [x] **FOUND-05**: MCP graceful degradation — commands that require unavailable MCPs show clear error with fallback suggestions
+- [x] **FOUND-06**: Ahrefs monetary values displayed in USD (divide cents by 100) via shared reference convention
 
 ### Original Commands (Enhanced)
 
@@ -117,11 +117,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | FOUND-01 | Phase 1 | Complete |
-| FOUND-02 | Phase 1 | Pending |
-| FOUND-03 | Phase 1 | Pending |
+| FOUND-02 | Phase 1 | Complete |
+| FOUND-03 | Phase 1 | Complete |
 | FOUND-04 | Phase 1 | Complete |
-| FOUND-05 | Phase 1 | Pending |
-| FOUND-06 | Phase 1 | Pending |
+| FOUND-05 | Phase 1 | Complete |
+| FOUND-06 | Phase 1 | Complete |
 | GSC-01 | Phase 2 | Pending |
 | GSC-02 | Phase 2 | Pending |
 | GSC-03 | Phase 2 | Pending |

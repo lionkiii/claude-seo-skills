@@ -12,7 +12,7 @@ This project expands the existing 12-command claude-seo skill system to 27 comma
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation** - Install infrastructure, YAML validation, MCP scoping, shared references, and orchestrator routing table
+- [x] **Phase 1: Foundation** - Install infrastructure, YAML validation, MCP scoping, shared references, and orchestrator routing table (completed 2026-03-02)
 - [ ] **Phase 2: Core Live Data** - GSC commands (9), Ahrefs commands (10), and markdown-audit — the primary differentiators over static analysis
 - [ ] **Phase 3: Cross-MCP & Differentiating** - SERP analysis, content briefs, brand radar, site-audit-pro flagship, and automated reporting
 - [ ] **Phase 4: Enhanced Originals & Local Analysis** - Upgrade the 12 original commands with MCP overlays; add log analysis, AI content check, internal links, local SEO, and migration validation
@@ -29,7 +29,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Invoking a command that requires an unavailable MCP returns a human-readable error message with a fallback suggestion rather than silent failure or hallucinated data
   4. The YAML validation script catches a malformed frontmatter file and exits non-zero before any skill is deployed
   5. Ahrefs monetary values in any output always show dollars (e.g., "$1,250") not raw cents (e.g., "125000")
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 
 Plans:
 - [x] 01-01-PLAN.md — Install script, source repo layout, YAML validation, Python venv setup, MCP scope verification (Wave 1)
@@ -93,7 +93,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/2 | Not started | - |
+| 1. Foundation | 2/2 | Complete   | 2026-03-02 |
 | 2. Core Live Data | 0/3 | Not started | - |
 | 3. Cross-MCP & Differentiating | 0/3 | Not started | - |
 | 4. Enhanced Originals & Local Analysis | 0/3 | Not started | - |
