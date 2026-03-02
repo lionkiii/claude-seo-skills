@@ -61,7 +61,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **CROSS-01**: `/seo serp <keyword>` — Live SERP analysis using Ahrefs SERP Overview + WebMCP crawling
 - [x] **CROSS-02**: `/seo content-brief <keyword>` — AI content brief generated from SERP analysis
 - [x] **CROSS-03**: `/seo brand-radar <brand>` — AI search brand monitoring via Ahrefs Brand Radar
-- [ ] **CROSS-04**: `/seo site-audit-pro <domain>` — Flagship audit combining all MCPs with sequential wave execution
+- [x] **CROSS-04**: `/seo site-audit-pro <domain>` — Flagship audit combining all MCPs with sequential wave execution
 - [x] **CROSS-05**: `/seo report <type> <domain>` — Automated SEO report generation (monthly, weekly, audit, competitor)
 
 ### Local Analysis Commands (New)
@@ -145,7 +145,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CROSS-01 | Phase 3 | Complete |
 | CROSS-02 | Phase 3 | Complete |
 | CROSS-03 | Phase 3 | Complete |
-| CROSS-04 | Phase 3 | Pending |
+| CROSS-04 | Phase 3 | Complete |
 | CROSS-05 | Phase 3 | Complete |
 | ORIG-01 | Phase 4 | Pending |
 | ORIG-02 | Phase 4 | Pending |

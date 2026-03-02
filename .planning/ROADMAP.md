@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Install infrastructure, YAML validation, MCP scoping, shared references, and orchestrator routing table (completed 2026-03-02)
 - [x] **Phase 2: Core Live Data** - GSC commands (9), Ahrefs commands (10), and markdown-audit — the primary differentiators over static analysis (completed 2026-03-02)
-- [ ] **Phase 3: Cross-MCP & Differentiating** - SERP analysis, content briefs, brand radar, site-audit-pro flagship, and automated reporting
+- [x] **Phase 3: Cross-MCP & Differentiating** - SERP analysis, content briefs, brand radar, site-audit-pro flagship, and automated reporting (completed 2026-03-02)
 - [ ] **Phase 4: Enhanced Originals & Local Analysis** - Upgrade the 12 original commands with MCP overlays; add log analysis, AI content check, internal links, local SEO, and migration validation
 
 ## Phase Details
@@ -63,7 +63,7 @@ Plans:
   3. `/seo brand-radar <brand>` returns AI search visibility data from Ahrefs Brand Radar; if the endpoint is unavailable, the command returns a clear error rather than fabricated results
   4. `/seo site-audit-pro <domain>` completes without crashing when any single agent hits a rate-limit error — the audit continues with remaining agents and notes skipped data sources in the output
   5. `/seo report <type> <domain>` produces a complete markdown report file with AI-generated narrative layered on top of the raw data — the file is saved to disk, not just printed to terminal
-**Plans:** 2/3 plans executed
+**Plans:** 3/3 plans complete
 
 Plans:
 - [ ] 03-01-PLAN.md — SERP analysis (seo-serp) and content brief (seo-content-brief) with Ahrefs SERP data + optional GSC overlay, ahrefs-api-reference.md Phase 3 tool mappings (Wave 1)
@@ -96,5 +96,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete   | 2026-03-02 |
 | 2. Core Live Data | 4/4 | Complete   | 2026-03-02 |
-| 3. Cross-MCP & Differentiating | 2/3 | In Progress|  |
+| 3. Cross-MCP & Differentiating | 3/3 | Complete   | 2026-03-02 |
 | 4. Enhanced Originals & Local Analysis | 0/3 | Not started | - |
