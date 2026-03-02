@@ -51,7 +51,7 @@ Plans:
 - [x] 02-01-PLAN.md — Fix routing table discrepancy, update GSC API reference with verified tool names, build seo-markdown-audit sub-skill (Wave 1)
 - [ ] 02-02-PLAN.md — Build 9 GSC sub-skills: overview, drops, opportunities, cannibalization, index-issues, compare, brand-vs-nonbrand, content-decay, new-keywords (Wave 2)
 - [ ] 02-03-PLAN.md — Build 10 Ahrefs sub-skills: overview, backlinks, keywords, competitors, content-gap, broken-links, new-links, anchor-analysis, dr-history, top-pages (Wave 2, parallel with 02-02)
-- [ ] 02-04-PLAN.md — Update install.sh, mark Phase 2 commands active in routing table, deploy and human-verify end-to-end (Wave 3)
+- [x] 02-04-PLAN.md — Update install.sh, mark Phase 2 commands active in routing table, deploy and human-verify end-to-end (Wave 3) (completed 2026-03-02)
 
 ### Phase 3: Cross-MCP & Differentiating
 **Goal**: Users can run commands that synthesize Ahrefs and GSC data together for insights neither source alone provides, including the flagship multi-agent site audit and automated report generation
