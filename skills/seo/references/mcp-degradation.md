@@ -25,8 +25,7 @@ Use ToolSearch with query "+google-search-console"
 - If no tools returned → check ~/.claude/mcp.json for GSC entry as fallback
 - If still not found → use the GSC error template below
 
-GSC MCP source: /Users/aash-zsbch1500/Desktop/GSC-MCP
-Registration: must be at user scope in ~/.claude/mcp.json (not project scope)
+GSC MCP: must be registered at user scope in ~/.claude/mcp.json (not project scope)
 Note: Project-scoped MCPs cause subagents to silently hallucinate (GitHub Issue #13898)
 ```
 
@@ -87,7 +86,7 @@ currently connected.
 - Use `/seo audit <url>` for a full static SEO audit
 
 **To connect GSC MCP:**
-- Register the GSC MCP from /Users/aash-zsbch1500/Desktop/GSC-MCP
+- Install and configure a Google Search Console MCP server (see README for setup)
 - Add it to ~/.claude/mcp.json at user scope (NOT project scope)
 - Verify GSC property access before running commands (domain vs URL prefix format)
 - See references/gsc-api-reference.md for property format details

@@ -1,4 +1,4 @@
-<!-- Updated: 2026-03-02 — verified from GSC-MCP/src/index.ts source -->
+<!-- Updated: 2026-03-03 — verified from GSC MCP source -->
 
 # GSC API Reference
 
@@ -7,11 +7,10 @@ MCP. Load this file on-demand when building or executing any GSC sub-skill.
 
 ## GSC MCP Tool Mapping (Verified from Source)
 
-GSC MCP source: `/Users/aash-zsbch1500/Desktop/GSC-MCP`
 Tool name prefix: depends on alias used during registration in `~/.claude/mcp.json`.
 Use ToolSearch at runtime to discover the actual prefix — see MCP Availability Check below.
 
-Verified mapping (read from `/Users/aash-zsbch1500/Desktop/GSC-MCP/GSC-MCP/src/index.ts`):
+Verified mapping (from GSC MCP source):
 
 | Sub-command | GSC MCP Tool | Key Params | Verified |
 |-------------|-------------|-----------|----------|
@@ -41,7 +40,7 @@ Both property formats are accepted by the GSC MCP server:
   - `"sc-domain:example.com"` (domain property — covers all subdomains and protocols)
   - `"https://example.com"` (URL prefix property — covers exact URL prefix only)
 
-Source: verified from `/Users/aash-zsbch1500/Desktop/GSC-MCP/GSC-MCP/src/index.ts`
+Source: verified from GSC MCP source
 
 **User-facing guidance:**
 When asking the user for their site, clarify which property type they added to
@@ -112,7 +111,7 @@ If no GSC tools found, also check if GSC MCP needs registration:
 ```
 cat ~/.claude/mcp.json | grep -i "google\|gsc"
 - Entry found but tools not loading → restart Claude Desktop and retry
-- No entry → user must register GSC MCP from /Users/aash-zsbch1500/Desktop/GSC-MCP
+- No entry → user must install and register a GSC MCP server (see README for setup)
 ```
 
 ## Phase 2 Discovery Checklist

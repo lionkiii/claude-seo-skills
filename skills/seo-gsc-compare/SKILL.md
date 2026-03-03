@@ -39,7 +39,7 @@ The `/seo gsc compare` command requires the GSC MCP, which is not currently conn
 - Use `/seo audit <url>` for a full static SEO audit
 
 **To connect GSC MCP:**
-- Register the GSC MCP from /Users/aash-zsbch1500/Desktop/GSC-MCP
+- Install and configure a Google Search Console MCP server (see README for setup)
 - Add it to ~/.claude/mcp.json at user scope (NOT project scope)
 - Verify GSC property access before running commands (domain vs URL prefix format)
 - See references/gsc-api-reference.md for property format details

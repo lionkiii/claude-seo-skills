@@ -227,7 +227,7 @@ GSC data for {site} is unavailable — the GSC MCP is not currently connected.
 Proceeding with SERP-only brief. No current ranking position data will be included.
 
 **To connect GSC MCP:**
-- Register the GSC MCP from /Users/aash-zsbch1500/Desktop/GSC-MCP
+- Install and configure a Google Search Console MCP server (see README for setup)
 - Add it to ~/.claude/mcp.json at user scope (NOT project scope)
 - Re-run `/seo content-brief {keyword} site={site}` to get the full brief with ranking overlay
 ```

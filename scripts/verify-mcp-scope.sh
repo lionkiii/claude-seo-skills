@@ -5,7 +5,6 @@
 # Always exits 0 — MCP registration is informational, not blocking.
 
 USER_MCP="${HOME}/.claude/mcp.json"
-GSC_LOCAL_PATH="${HOME}/Desktop/GSC-MCP"
 
 echo "=== MCP Scope Verification ==="
 echo ""
@@ -16,24 +15,13 @@ if [ -f "${USER_MCP}" ]; then
     echo "  GSC MCP: registered at user scope (~/.claude/mcp.json)"
   else
     echo "  GSC MCP: NOT FOUND in ~/.claude/mcp.json"
-    echo "         Register manually:"
-    if [ -d "${GSC_LOCAL_PATH}" ]; then
-      echo "           MCP source found at: ${GSC_LOCAL_PATH}"
-      echo "           Add entry to ~/.claude/mcp.json:"
-      echo '           "google-search-console": {'
-      echo "             \"command\": \"node\","
-      echo "             \"args\": [\"${GSC_LOCAL_PATH}/dist/index.js\"]"
-      echo '           }'
-    else
-      echo "           Source not found at ${GSC_LOCAL_PATH} — locate GSC MCP and add to ~/.claude/mcp.json"
-    fi
+    echo "         GSC commands require a Google Search Console MCP server."
+    echo "         See README.md for setup instructions."
   fi
 else
   echo "  GSC MCP: NOT FOUND — ~/.claude/mcp.json does not exist"
-  echo "         Create ~/.claude/mcp.json and register the GSC MCP"
-  if [ -d "${GSC_LOCAL_PATH}" ]; then
-    echo "         MCP source available at: ${GSC_LOCAL_PATH}"
-  fi
+  echo "         Create ~/.claude/mcp.json and register the GSC MCP."
+  echo "         See README.md for setup instructions."
 fi
 
 echo ""
