@@ -14,7 +14,7 @@
 ## Quick Install
 
 ```bash
-git clone https://github.com/your-username/SEO.git
+git clone https://github.com/lionkiii/SEO.git
 cd SEO
 bash install.sh
 bash scripts/smoke-test.sh
@@ -128,7 +128,7 @@ Ahrefs MCP is connected automatically through your Claude.ai account. No local c
 
 GSC commands require a Google Search Console MCP server registered at **user scope** (not project scope). Project-scoped MCPs cause subagent hallucination issues.
 
-1. Install a GSC MCP server (e.g. [gsc-mcp-server](https://www.npmjs.com/search?q=gsc%20mcp))
+1. Install a GSC MCP server (e.g. [google-searchconsole-mcp](https://github.com/lionkiii/google-searchconsole-mcp))
 2. Add it to `~/.claude/mcp.json`:
 
 ```json
