@@ -244,7 +244,8 @@ Load these on-demand as needed — do NOT load all at startup:
 - `references/mcp-degradation.md` — MCP availability checks, error templates, fallback mapping
 - `references/ahrefs-api-reference.md` — Ahrefs MCP tool mapping, response fields, monetary conversion
 - `references/gsc-api-reference.md` — GSC MCP tool mapping, property formats, response fields
-- `references/llms-txt-spec.md` — llms.txt specification, format rules, examples, adopter list
+- `references/llms-txt-spec.md` — llms.txt specification, format rules, tooling, examples, 2000+ adopter list
+- `references/ai-crawlers-guide.md` — AI crawler registry, robots.txt tokens, blocking stats, strategy templates
 
 ## Scoring Methodology
 

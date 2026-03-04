@@ -13,8 +13,10 @@ allowed-tools:
 # AI Crawler Robots.txt Audit
 
 Analyzes a site's robots.txt specifically for AI crawler access policies.
-Complements `/seo technical` (which does a broad robots.txt check) with
+Complements `/seo-technical` (which does a broad robots.txt check) with
 deep AI-specific analysis.
+
+@skills/seo/references/ai-crawlers-guide.md
 
 ## AI Crawler Registry
 
