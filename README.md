@@ -1,19 +1,20 @@
 # Claude SEO Skills
 
-**42 powerful SEO commands for [Claude Code](https://docs.anthropic.com/en/docs/claude-code)** — the most comprehensive SEO toolkit available as Claude Code skills. Run full site audits, analyze backlinks with Ahrefs, track rankings with Google Search Console, research SERPs, generate content briefs, and more — all from your terminal.
+**44 powerful SEO commands for [Claude Code](https://docs.anthropic.com/en/docs/claude-code)** — the most comprehensive SEO toolkit available as Claude Code skills. Run full site audits, analyze backlinks with Ahrefs, track rankings with Google Search Console, research SERPs, generate content briefs, and more — all from your terminal.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-42-green.svg)](#all-42-commands)
+[![Skills](https://img.shields.io/badge/Skills-44-green.svg)](#all-44-commands)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-blueviolet.svg)](https://docs.anthropic.com/en/docs/claude-code)
 
 ## Why Claude SEO Skills?
 
-- **42 dedicated commands** — the largest Claude Code SEO skill set available
+- **44 dedicated commands** — the largest Claude Code SEO skill set available
 - **Live data from Ahrefs** — Domain Rating, backlinks, keyword rankings, competitor analysis, content gaps
 - **Google Search Console integration** — real ranking data, indexing status, traffic drops, keyword cannibalization
 - **Technical SEO audits** — Core Web Vitals, crawlability, security headers, structured data, mobile optimization
 - **Content analysis** — E-E-A-T scoring, AI content detection, readability, keyword optimization
 - **AI search optimization** — GEO (Generative Engine Optimization) for AI Overviews, ChatGPT, Perplexity
+- **AI readability** — llms.txt generation/validation, AI crawler robots.txt audit
 - **Parallel execution** — site audits delegate to 6 specialist agents for speed
 - **Graceful MCP degradation** — works with whatever MCP servers you have connected; skips what's missing
 
@@ -68,9 +69,15 @@ That's it. The installer copies skills and agents to `~/.claude/`, sets up a Pyt
 
 # Optimize for AI search (Google AI Overviews, ChatGPT, Perplexity)
 /seo geo example.com
+
+# Generate an llms.txt file for your site
+/seo llms-txt generate example.com
+
+# Audit your robots.txt for AI crawler policies
+/seo robots-ai example.com
 ```
 
-## All 42 Commands
+## All 44 Commands
 
 ### Site Audits & Technical SEO
 
@@ -139,6 +146,13 @@ That's it. The installer copies skills and agents to `~/.claude/`, sets up a Pyt
 | `/seo competitor-pages <domain>` | Generate SEO-optimized "X vs Y" and "alternatives to X" comparison pages — feature matrices, schema markup, conversion elements |
 | `/seo report <url>` | Generate and save a complete SEO report to disk — configurable sections, multiple output formats |
 
+### AI Readability
+
+| Command | What It Does |
+|---|---|
+| `/seo llms-txt <url>` | Audit, generate, or validate llms.txt files — the emerging standard for helping LLMs understand your site content |
+| `/seo robots-ai <url>` | Audit robots.txt for AI crawler policies — GPTBot, ClaudeBot, PerplexityBot, Google-Extended, and 13 more AI bots |
+
 ## How It Works
 
 ```
@@ -193,7 +207,7 @@ Without GSC, all 33 non-GSC commands work perfectly. The 9 GSC commands will sho
 
 ```
 claude-seo-skills/
-├── skills/                    # 42 skill definitions
+├── skills/                    # 44 skill definitions
 │   ├── seo/                   # Orchestrator + shared references
 │   │   ├── SKILL.md           # Main /seo command router
 │   │   ├── references/        # API refs, quality gates, E-E-A-T framework
@@ -202,7 +216,7 @@ claude-seo-skills/
 │   ├── seo-audit/             # /seo audit
 │   ├── seo-ahrefs-keywords/   # /seo ahrefs keywords
 │   ├── seo-gsc-overview/      # /seo gsc overview
-│   └── ...                    # 39 more skill directories
+│   └── ...                    # 41 more skill directories
 ├── agents/                    # 6 specialist agents for parallel audits
 ├── scripts/                   # Install, smoke test, MCP verification
 ├── install.sh                 # One-command installer

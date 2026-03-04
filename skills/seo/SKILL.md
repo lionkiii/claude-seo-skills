@@ -1,14 +1,15 @@
 ---
 name: seo
 description: >
-  Comprehensive SEO analysis for any website or business type. Orchestrates 42 sub-skills
-  (42 active): full site audits, single-page analysis, technical SEO (CWV/INP), schema markup,
-  E-E-A-T content quality (Dec 2025 QRG), image optimization, sitemaps, GEO for AI Overviews,
-  ChatGPT, Perplexity, plus live GSC and Ahrefs MCP data. GSC: overview, drops, opportunities,
-  brand-vs-nonbrand, cannibalization, compare, content-decay, index-issues, new-keywords.
-  Ahrefs: overview, backlinks, keywords, competitors, content-gap, broken-links, new-links,
-  anchor-analysis, dr-history, top-pages. Cross-MCP: serp, content-brief, brand-radar,
-  site-audit-pro, report. Local: log-analysis, ai-content-check, internal-links, local, migration-check.
+  Comprehensive SEO analysis for any website or business type. Orchestrates 44 sub-skills
+  (44 active): full site audits, technical SEO (CWV/INP), schema, E-E-A-T content quality,
+  images, sitemaps, GEO for AI Overviews, llms.txt generation, AI crawler audit,
+  plus live GSC and Ahrefs MCP data. GSC: overview, drops, opportunities, brand-vs-nonbrand,
+  cannibalization, compare, content-decay, index-issues, new-keywords. Ahrefs: overview,
+  backlinks, keywords, competitors, content-gap, broken-links, new-links, anchor-analysis,
+  dr-history, top-pages. Cross-MCP: serp, content-brief, brand-radar, site-audit-pro, report.
+  Local: log-analysis, ai-content-check, internal-links, local, migration-check.
+  AI Readability: llms-txt, robots-ai.
   Triggers on: "SEO", "audit", "schema", "Core Web Vitals", "sitemap", "E-E-A-T", "AI Overviews",
   "GEO", "technical SEO", "content quality", "structured data", "GSC", "Ahrefs",
   "backlinks", "keywords", "search console", "domain rating", "local SEO", "migration".
@@ -23,8 +24,8 @@ allowed-tools:
 # SEO — Universal SEO Analysis Skill
 
 Comprehensive SEO analysis across all industries (SaaS, local services,
-e-commerce, publishers, agencies). Orchestrates 42 specialized sub-skills
-(42 active) and 6 subagents.
+e-commerce, publishers, agencies). Orchestrates 44 specialized sub-skills
+(44 active) and 6 subagents.
 
 ## Quick Reference
 
@@ -90,6 +91,13 @@ e-commerce, publishers, agencies). Orchestrates 42 specialized sub-skills
 | `/seo local <business>` | Local SEO audit (NAP, schema, GBP, citations) | active |
 | `/seo migration-check <old> <new>` | Site migration redirect and SEO validator | active |
 
+### Active Commands (Phase 5 — AI Readability)
+
+| Command | What it does | Status |
+|---------|-------------|--------|
+| `/seo llms-txt <url\|generate\|validate>` | Generate, validate, or audit llms.txt files | active |
+| `/seo robots-ai <url>` | Audit robots.txt for AI crawler access policies | active |
+
 ## Orchestration Logic
 
 When the user invokes `/seo audit`, delegate to subagents in parallel:
@@ -142,7 +150,7 @@ For grouped commands, extract the sub-command and route to the specific sub-skil
 
 ### Routing Table
 
-Full mapping of all 42 commands to sub-skill directory names:
+Full mapping of all 44 commands to sub-skill directory names:
 
 | Command | Sub-skill Directory | Status |
 |---------|--------------------|----|
@@ -188,6 +196,8 @@ Full mapping of all 42 commands to sub-skill directory names:
 | `/seo internal-links` | `seo-internal-links/` | active |
 | `/seo local` | `seo-local/` | active |
 | `/seo migration-check` | `seo-migration-check/` | active |
+| `/seo llms-txt` | `seo-llms-txt/` | active |
+| `/seo robots-ai` | `seo-robots-ai/` | active |
 
 ### Unavailable Command Response
 
@@ -234,6 +244,7 @@ Load these on-demand as needed — do NOT load all at startup:
 - `references/mcp-degradation.md` — MCP availability checks, error templates, fallback mapping
 - `references/ahrefs-api-reference.md` — Ahrefs MCP tool mapping, response fields, monetary conversion
 - `references/gsc-api-reference.md` — GSC MCP tool mapping, property formats, response fields
+- `references/llms-txt-spec.md` — llms.txt specification, format rules, examples, adopter list
 
 ## Scoring Methodology
 
@@ -258,7 +269,7 @@ Weighted aggregate of all categories:
 
 ## Sub-Skills
 
-This skill orchestrates 42 specialized sub-skills (42 active):
+This skill orchestrates 44 specialized sub-skills (44 active):
 
 **Active (Phase 1 — Static Analysis):**
 1. **seo-audit** — Full website audit with parallel delegation
@@ -313,6 +324,10 @@ This skill orchestrates 42 specialized sub-skills (42 active):
 40. **seo-internal-links** — Internal link structure audit
 41. **seo-local** — Local SEO audit
 42. **seo-migration-check** — Site migration validator
+
+**Active (Phase 5 — AI Readability):**
+43. **seo-llms-txt** — llms.txt generation, validation, and audit
+44. **seo-robots-ai** — AI crawler robots.txt audit
 
 ## Subagents
 

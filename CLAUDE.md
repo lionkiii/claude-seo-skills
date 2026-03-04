@@ -1,6 +1,6 @@
 # Claude SEO Skills
 
-42-command SEO skill system that runs inside Claude Code via `/seo <command>`.
+44-command SEO skill system that runs inside Claude Code via `/seo <command>`.
 
 ## Structure
 
