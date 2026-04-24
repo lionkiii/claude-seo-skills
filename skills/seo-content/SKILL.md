@@ -113,7 +113,27 @@ Google's raters now formally assess whether content appears AI-generated.
 - No author attribution
 - Factual inaccuracies
 
-> **Helpful Content System (March 2024):** The Helpful Content System was merged into Google's core ranking algorithm during the March 2024 core update. It no longer operates as a standalone classifier. Helpfulness signals are now weighted within every core update — the same principles apply (people-first content, demonstrating E-E-A-T, satisfying user intent), but enforcement is continuous rather than through separate HCU updates.
+> **Helpful Content System (March 2024):** The Helpful Content System was merged into Google's core ranking algorithm during the March 2024 core update. It no longer operates as a standalone classifier. Helpfulness signals are now weighted within every core update — the same principles apply (people-first content, demonstrating E-E-A-T-aligned behaviours, satisfying user intent), but enforcement is continuous rather than through separate HCU updates.
+>
+> **E-E-A-T is not itself a ranking factor** (per the Google SEO Starter Guide). It is a concept used by Google's third-party quality raters to evaluate results — raters have no direct levers over rankings. Audit recommendations should target the underlying behaviours (first-hand experience markers, author credentials, site reputation, transparent authorship) rather than presenting E-E-A-T as a measured signal.
+
+### Scaled content abuse — updated spam policy (2026-04-13)
+
+Google's spam policy now explicitly names generative AI under "scaled content abuse":
+
+> *"Using generative AI tools or other similar tools to generate many pages without adding value for users."*
+
+Key framing for audits:
+- **AI-assisted content is allowed** when it adds genuine user value (editor review, fact-checking, original insights layered on top).
+- **Scaled AI content churn is spam** — hundreds of near-template pages generated to target long-tail keywords with no differentiation violate the policy.
+- The focus is on **user value, not creation method**. Do not flag content as spam merely because it was drafted by AI.
+- Cross-reference the `seo-ai-content-check` skill for telltale-pattern detection (sentence uniformity, vocabulary diversity, structural templates).
+
+### Algorithm context (recent core updates)
+
+- **March 2026 Core Update** (rolled out 2026-03-27 → 2026-04-08): rewarded destination authorities over aggregator/intermediary pages. ~24% of top-10 URLs fell out of the top-100 for affected queries. Signals intent match and comparative page value weighted higher. If a site saw significant drops in March-April 2026, audit for: (a) aggregator/roundup content structure vs. destination-quality content, (b) comparative depth vs. generic overview, (c) topical authority and entity clarity.
+- **February 2026 Discover Core Update** (2026-02-05): Discover rankings now favour local relevance, less clickbait, more original in-depth expertise. Affects Discover traffic specifically; check Discover-segmented GSC data.
+- **Preferred Sources** (January 2026): new Top Stories / authoritative publisher selection concept. Publishers identified as preferred for a query/topic get elevated placement. Not an algorithm change per se — more a surfacing mechanism.
 
 ## AI Citation Readiness (GEO signals)
 

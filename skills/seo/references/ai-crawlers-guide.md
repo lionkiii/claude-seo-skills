@@ -1,4 +1,6 @@
-<!-- Updated: 2026-03-04 -->
+<!-- Updated: 2026-04-24 -->
+<!-- Last verified against live Google docs: 2026-04-24 -->
+<!-- Next verification due: 2026-07-24 -->
 <!-- Sources: https://darkvisitors.com/agents, https://platform.openai.com/docs/bots -->
 <!-- See also: https://github.com/ai-robots-txt/ai.robots.txt -->
 
@@ -7,6 +9,14 @@
 Comprehensive registry of AI web crawlers, their robots.txt tokens, purposes,
 and official documentation. Load this file on-demand when auditing robots.txt
 for AI crawler policies via `/seo-robots-ai`.
+
+> **Google crawler IP range JSON files moved in March 2026.** Any firewall allowlist, rate-limiter, or crawler-verification script that points at the old URL locations must be updated. Canonical current locations:
+> - Googlebot family: `https://developers.google.com/static/search/apis/ipranges/googlebot.json`
+> - GoogleOther / Google-InspectionTool / Google-CloudVertexBot / Storebot-Google: `https://developers.google.com/static/search/apis/ipranges/common-crawlers.json`
+> - AdsBot-Google, APIs-Google, Mediapartners-Google: `https://developers.google.com/static/search/apis/ipranges/special-crawlers.json`
+> - `Google-Extended` has no distinct HTTP user-agent or IP range — it is a robots.txt-only opt-out token for Gemini training/grounding.
+>
+> Source: Google Search Central blog, March 2026 ("New location for Google Crawlers' IP Range Files").
 
 ---
 

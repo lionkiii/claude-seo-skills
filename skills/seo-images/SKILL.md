@@ -51,6 +51,15 @@ Recommend compression to target thresholds where possible without quality loss.
 
 Recommend WebP/AVIF over JPEG/PNG. Check for `<picture>` element with format fallbacks.
 
+#### Preferred thumbnail / primary image signals (2026-03-02 doc update)
+
+Google's Images doc was updated 2026-03-02 with clearer guidance on preferred-image selection. When a page has multiple candidate images, Google may pick the "most representative" one for SERP thumbnails and Discover cards. Help Google pick correctly:
+
+- Add `<meta property="og:image" content="..." />` with a dedicated 1200×630 (or 1200×1200 square) image intended for sharing — also used as a preferred-thumbnail hint.
+- Add `primaryImageOfPage` to the page's JSON-LD (`WebPage.primaryImageOfPage` pointing at an `ImageObject`) for an explicit signal.
+- Ensure the preferred image is high-resolution, directly relevant, and renders well at small sizes (mobile SERP thumbnails).
+- Avoid interfering with Google's choice by using `<meta name="robots" content="max-image-preview:none">` — that blocks image thumbnails entirely.
+
 #### Recommended `<picture>` Element Pattern
 
 Use progressive enhancement with the most efficient format first:

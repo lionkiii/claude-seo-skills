@@ -1,7 +1,10 @@
-<!-- Updated: 2026-02-07 -->
-# Schema.org Types — Status & Recommendations (February 2026)
+<!-- Updated: 2026-04-24 -->
+# Schema.org Types — Status & Recommendations (April 2026)
 
 **Schema.org Version:** 29.4 (December 8, 2025)
+
+**Last verified against live Google docs:** 2026-04-24
+**Next verification due:** 2026-07-24
 
 ## Format Preference
 Always use **JSON-LD** (`<script type="application/ld+json">`).
@@ -15,7 +18,7 @@ Google's documentation explicitly recommends JSON-LD over Microdata and RDFa.
 
 | Type | Use Case | Key Properties |
 |------|----------|----------------|
-| Organization | Company info | name, url, logo, contactPoint, sameAs |
+| Organization | Company info | name, url, logo, contactPoint, sameAs; merchant-panel eligibility (2026-04-15 update): hasMerchantReturnPolicy, hasMemberProgram, hasShippingService; identifiers: duns, globalLocationNumber, iso6523Code, leiCode, naics, taxID, vatID |
 | LocalBusiness | Physical businesses | name, address, telephone, openingHours, geo, priceRange |
 | SoftwareApplication | Desktop/mobile apps | name, operatingSystem, applicationCategory, offers, aggregateRating |
 | WebApplication | Browser-based SaaS | name, applicationCategory, offers, browserRequirements, featureList |
@@ -25,10 +28,10 @@ Google's documentation explicitly recommends JSON-LD over Microdata and RDFa.
 | Article | Blog posts, news | headline, author, datePublished, dateModified, image, publisher |
 | BlogPosting | Blog content | Same as Article + blog-specific context |
 | NewsArticle | News content | Same as Article + news-specific context |
-| Review | Individual reviews | reviewRating, author, itemReviewed, reviewBody |
-| AggregateRating | Rating summaries | ratingValue, reviewCount, bestRating, worstRating |
+| Review | Individual reviews | reviewRating, author, itemReviewed, reviewBody — **self-serving reviews are NOT eligible for rich results**: reviews authored by the merchant about their own Product/Service/Organization/LocalBusiness do not qualify (policy since 2019, still enforced) |
+| AggregateRating | Rating summaries | ratingValue, reviewCount, bestRating, worstRating — **self-serving restriction applies**: use only ratings aggregated from third-party/customer reviews, not merchant self-ratings |
 | BreadcrumbList | Navigation | itemListElement with position, name, item |
-| WebSite | Site-level | name, url, potentialAction (SearchAction for sitelinks search) |
+| WebSite | Site-level | name, url — ⚠️ `potentialAction`/`SearchAction` no longer triggers the Sitelinks Search Box (feature removed from Google Search on 21 November 2024; dedicated doc page 404s). WebSite schema remains useful for entity understanding but do NOT present `SearchAction` as a rich-result win. |
 | WebPage | Page-level | name, description, datePublished, dateModified |
 | Person | Author/team | name, jobTitle, url, sameAs, image, worksFor |
 | ContactPage | Contact pages | name, url |
@@ -53,19 +56,20 @@ Google's documentation explicitly recommends JSON-LD over Microdata and RDFa.
 
 ---
 
-## Deprecated — Never recommend
+## Deprecated / retired — Never recommend
 
 | Type | Status | Since | Notes |
 |------|--------|-------|-------|
 | HowTo | Rich results fully removed | September 2023 | Google stopped showing how-to rich results |
-| SpecialAnnouncement | Deprecated | July 31, 2025 | COVID-era schema, no longer processed |
-| CourseInfo | Retired from rich results | June 2025 | Merged into Course |
-| EstimatedSalary | Retired from rich results | June 2025 | No longer displayed |
-| LearningVideo | Retired from rich results | June 2025 | Use VideoObject instead |
-| ClaimReview | Retired from rich results | June 2025 | Fact-check markup no longer generates rich results |
-| VehicleListing | Retired from rich results | June 2025 | Vehicle listing structured data discontinued |
-| Book Actions | Deprecated then REVERSED | June 2025 | **Still functional as of Feb 2026** — historical note only |
-| Practice Problem | Retired from rich results | Late 2025 | Educational practice problems no longer displayed |
+| **Sitelinks Search Box feature** | Feature removed from Google Search | **November 2024** | `WebSite.potentialAction`/`SearchAction` schema still parses but triggers no Search feature. Docs page 404s. |
+| SpecialAnnouncement | Retired from rich results | September 2025 → Search Console removal January 2026 | COVID-era schema, no longer processed |
+| CourseInfo | Retired from rich results | September 2025 → Search Console removal January 2026 | Merged into Course |
+| EstimatedSalary | Retired from rich results | September 2025 → Search Console removal January 2026 | No longer displayed |
+| LearningVideo | Retired from rich results | September 2025 → Search Console removal January 2026 | Use VideoObject instead |
+| ClaimReview | Retired from rich results | September 2025 → Search Console removal January 2026 | Fact-check markup no longer generates rich results |
+| VehicleListing | Retired from rich results | September 2025 → Search Console removal January 2026 | Vehicle listing structured data discontinued |
+| **Practice Problem** | **Documentation removed and feature discontinued** | **January 2026** | Docs removed from developers.google.com on 2026-01-06 |
+| Book Actions | Deprecated then REVERSED | June 2025 | **Still functional as of April 2026** — historical note only |
 | Dataset | Retired from rich results | Late 2025 | Dataset Search feature discontinued |
 
 ---
@@ -83,6 +87,10 @@ Google's documentation explicitly recommends JSON-LD over Microdata and RDFa.
 | Organization-level shipping/return policies | November 2025 | Configure via Search Console without Merchant Center |
 | ConferenceEvent | December 2025 | Schema.org v29.4 addition |
 | PerformingArtsEvent | December 2025 | Schema.org v29.4 addition |
+| **Organization merchant-panel fields** | **April 15, 2026** | `hasMerchantReturnPolicy`, `hasMemberProgram`, `hasShippingService` newly recommended for merchant knowledge-panel eligibility |
+| **Discussion Forum + QAPage comment-thread property expansion** | **March 24, 2026** | Expanded properties for forum/community content and Q&A pages |
+| **Preferred Sources concept** | **January 2026** | New Top Stories / authoritative publisher selection concept — shapes E-E-A-T audits, not a schema type |
+| **Image preferred-thumbnail metadata** | **March 2, 2026** | New guidance for specifying preferred thumbnails (see Google Images doc, relevant to seo-images skill) |
 
 ## E-commerce Requirements (Updated)
 

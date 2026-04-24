@@ -18,6 +18,8 @@ allowed-tools:
 Analyzes text for AI-generated content indicators using writing pattern analysis.
 No external API calls — pure local text analysis.
 
+> **Framing (Google spam policy, updated 2026-04-13):** AI-assisted content is **not itself a policy violation**. Google's "scaled content abuse" policy specifically targets *"Using generative AI tools or other similar tools to generate many pages without adding value for users."* The focus is on **user value**, not creation method. A single well-researched AI-assisted article with editor review and original insight is acceptable; hundreds of near-template AI-generated pages targeting long-tail keywords are not. Use this skill's confidence score to inform editorial decisions, not as a direct spam signal.
+
 ## Inputs
 
 - `target`: URL or file path.

@@ -1,5 +1,7 @@
-<!-- Updated: 2026-02-07 -->
-# Core Web Vitals Thresholds (February 2026)
+<!-- Updated: 2026-04-24 -->
+<!-- Last verified against live Google docs: 2026-04-24 -->
+<!-- Next verification due: 2026-07-24 -->
+# Core Web Vitals Thresholds (April 2026)
 
 ## Current Metrics
 
