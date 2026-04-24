@@ -185,8 +185,9 @@ workbook for the full list with live hyperlinks.
   `--no-ssl-verify` to `crawl_site.py`.
 - **GSC "Multiple accounts found"** — always pass `account=` when
   more than one alias exists.
-- **Ahrefs `prefix` mode needs `www.`** — `zoho.com/campaigns/` returns
-  zero; `www.zoho.com/campaigns/` returns the correct subfolder data.
+- **Ahrefs `prefix` mode needs `www.`** — a bare `example.com/blog/`
+  target returns zero; `www.example.com/blog/` returns the correct
+  subfolder data. Always include the `www.` subdomain if the site uses it.
 - **Ahrefs `subdomains` mode returns whole-domain metrics** — do not use
   it for subfolder audits.
 - **Ahrefs monetary values are cents** — builder divides by 100 for display.

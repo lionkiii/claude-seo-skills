@@ -21,7 +21,7 @@ Usage:
         [--ahrefs-top-pages /tmp/audit/ahrefs_top_pages.json] \\
         [--ahrefs-keywords /tmp/audit/ahrefs_keywords.json] \\
         [--dr 92] \\
-        [--brand-regex "zoho|campaing|..."]
+        [--brand-regex "example|exmple|exmaple"]
 
 Data-file formats: each is a JSON list-of-dicts or dict with a known key.
 See skills/seo-audit/scripts/README.md for examples.
