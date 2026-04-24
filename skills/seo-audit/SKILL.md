@@ -1,11 +1,14 @@
 ---
 name: seo-audit
 description: >
-  Full website SEO audit with parallel subagent delegation. Crawls up to 500
-  pages, detects business type, delegates to 6 specialists, generates health
-  score. Enhanced with live Ahrefs (DR, backlinks, traffic) and GSC (indexing,
-  top pages) data when MCPs are available. Use when user says "audit", "full
-  SEO check", "analyze my site", or "website health check".
+  Full website SEO audit producing an interactive multi-sheet XLSX workbook
+  with per-issue Status dropdowns (To Do / In Progress / Done / Skipped / N/A)
+  and row-level conditional formatting. Crawls up to 500 pages from a sitemap,
+  extracts on-page/technical/schema/hreflang/content signals, overlays live
+  Ahrefs (DR, traffic, keywords) and GSC (90-day clicks/impressions, device
+  split, URL inspection) data when MCPs are available. Every finding links to
+  the official Google Search Central / web.dev reference. Use when user says
+  "audit", "full SEO check", "analyze my site", or "website health check".
 allowed-tools:
   - Read
   - Bash
@@ -14,178 +17,187 @@ allowed-tools:
   - ToolSearch
 ---
 
-# Full Website SEO Audit
+# Full Website SEO Audit — XLSX Deliverable
+
+## Deliverable
+
+A single `.xlsx` file with up to 17 sheets, saved to a user-specified path
+(default: `~/Desktop/seo-audit-{site}-{YYYY-MM-DD}.xlsx`).
+
+**Every actionable row has a Status column** with a dropdown (data validation):
+`To Do`, `In Progress`, `Done`, `Skipped`, `Not Applicable`.
+
+Row auto-colours via conditional formatting:
+- `Done` → green
+- `Skipped` / `Not Applicable` → grey
+- `In Progress` → soft yellow
+
+Priority columns use red / orange / yellow / green for Critical / High /
+Medium / Low. Opens cleanly in Excel, Numbers, and Google Sheets.
+
+## Sheet layout (in order)
+
+| # | Sheet | Purpose |
+|---|---|---|
+| 1 | Read Me | Scope, how to use, priority/effort definitions |
+| 2 | Executive Summary | Overall health score, category scores, top critical findings |
+| 3 | Action Plan | Master prioritised to-do list with Status + Priority + Effort dropdowns |
+| 4 | On-Page Issues | Per-page title / meta / H1 problems (sorted by priority) |
+| 5 | Schema Missing | Every page lacking JSON-LD + inferred page type + recommended schema |
+| 6 | Hreflang Missing | Pages without hreflang in HTML `<head>` |
+| 7 | Thin Content | Pages under 300 words with severity-tiered fix |
+| 8 | Duplicate Titles & Meta | Groups of pages sharing the same title or meta |
+| 9 | Image Issues | Pages with images missing `alt` |
+| 10 | GSC - Top Pages *(if GSC available)* | 90-day clicks / impressions / CTR / position |
+| 11 | GSC - Top Queries *(if GSC available)* | Branded vs non-branded flagged; low-CTR rows highlighted |
+| 12 | Ahrefs - Top Pages *(if Ahrefs available)* | Monthly traffic / traffic value / keywords per page |
+| 13 | Ahrefs - Keywords *(if Ahrefs available)* | Organic keywords ordered by traffic |
+| 14 | Page Inventory | Every crawled URL with all extracted metrics (filterable) |
+| 15 | Google References | Every authoritative doc cited throughout |
 
 ## Process
 
-0. **Load reference** — read `seo/references/google-seo-guide.md` for category-aligned checks
-1. **Fetch homepage** — use `scripts/fetch_page.py` to retrieve HTML
-2. **Detect business type** — analyze homepage signals per seo orchestrator
-3. **Crawl site** — follow internal links up to 500 pages, respect robots.txt
-4. **Delegate to subagents** (if available, otherwise run inline sequentially):
-   - `seo-technical` — robots.txt, sitemaps, canonicals, Core Web Vitals, security headers
-   - `seo-content` — E-E-A-T, readability, thin content, AI citation readiness
-   - `seo-schema` — detection, validation, generation recommendations
-   - `seo-sitemap` — structure analysis, quality gates, missing pages
-   - `seo-performance` — LCP, INP, CLS measurements
-   - `seo-visual` — screenshots, mobile testing, above-fold analysis
-5. **Score** — aggregate into SEO Health Score (0-100)
-6. **Report** — generate prioritized action plan
+### 0. Confirm scope with user
+Ask (in one message):
+- Target URL or folder (e.g. `https://example.com` vs `https://example.com/blog/`)?
+- Sitemap — auto-discover via `robots.txt` / `/sitemap.xml`, or user-provided URL?
+- GSC date range — default last **90 days** (user may override, e.g. 28 days)?
+- Enrich with Ahrefs + GSC if MCPs are available?
+- Output path — default `~/Desktop/seo-audit-{site}-{YYYY-MM-DD}.xlsx`?
+- Interactive XLSX with Status dropdowns — confirm (default yes)?
 
-## Crawl Configuration
-
+### 1. Crawl
+Run `skills/seo/scripts/crawl_site.py`:
 ```
-Max pages: 500
-Respect robots.txt: Yes
-Follow redirects: Yes (max 3 hops)
-Timeout per page: 30 seconds
-Concurrent requests: 5
-Delay between requests: 1 second
+python crawl_site.py <base_url> \
+    [--sitemap <sitemap_url>] \
+    [--prefix <folder_url>] \
+    [--max-pages 500] \
+    [--no-ssl-verify] \
+    --out <work_dir>
 ```
+Emits `crawl_results.json` and `crawl_summary.json`.
 
-## Output Files
+**Per-page signals extracted:** status, final URL, title (+length), meta
+description (+length), canonical (+self-match), robots meta, `X-Robots-Tag`,
+`noindex`, H1 count + first text, H2 count, hreflang count, JSON-LD block
+count + `@type`s, og/twitter tag counts, image count + missing-alt count, word
+count, internal/external link counts, viewport/charset presence.
 
-- `FULL-AUDIT-REPORT.md` — Comprehensive findings
-- `ACTION-PLAN.md` — Prioritized recommendations (Critical → High → Medium → Low)
-- `screenshots/` — Desktop + mobile captures (if Playwright available)
+### 2. MCP availability check
+Use `ToolSearch` with `"+ahrefs"` and `"+google-search-console"` (or `"+gsc"`)
+to detect which live-data tools are loaded. Proceed with whichever is
+available; skip the corresponding sheets if not.
 
-## Scoring Weights
+### 3. Pull live data in parallel
+**Google Search Console (if available):**
+- `mcp__gsc__list_sites` — find the correct property. If multiple accounts
+  exist you MUST pass the `account` parameter on every call.
+- `mcp__gsc__get_top_pages` — last N days, sortBy `clicks`, limit 100.
+- `mcp__gsc__query_search_analytics` — dimensions `["query"]`, rowLimit 200.
+- `mcp__gsc__query_search_analytics` — dimensions `["device"]`, rowLimit 10.
+- `mcp__gsc__inspect_url` — top 3-5 pages to confirm indexing + rich-result
+  verdict.
 
-| Category | Weight |
-|----------|--------|
-| Technical SEO | 25% |
-| Content Quality | 25% |
-| On-Page SEO | 20% |
-| Schema / Structured Data | 10% |
-| Performance (CWV) | 10% |
-| Images | 5% |
-| AI Search Readiness | 5% |
+**Ahrefs (if available):**
+- `site-explorer-domain-rating` — DR + Ahrefs Rank.
+- `site-explorer-metrics` with `mode=prefix` and target `www.{domain}/{path}/`
+  (include `www.` and trailing slash). For a subfolder audit, prefix mode is
+  correct; `subdomains` mode returns whole-domain data.
+- `site-explorer-top-pages` (same target) — `select` supports `url`,
+  `sum_traffic`, `value`, `top_keyword`, `top_keyword_volume`,
+  `top_keyword_best_position`, `keywords`, `referring_domains`.
+- `site-explorer-organic-keywords` (same target) — `select` supports
+  `keyword`, `best_position`, `volume`, `cpc`, `sum_traffic`,
+  `best_position_url`, `serp_features`, `is_branded`, `keyword_difficulty`.
 
-## Report Structure
+Save each payload to JSON in the work dir. Monetary fields (`value`, `cpc`,
+`traffic_cost`) are in **USD cents** — the builder divides by 100.
 
-### Executive Summary
-- Overall SEO Health Score (0-100)
-- Business type detected
-- Top 5 critical issues
-- Top 5 quick wins
-
-### Technical SEO
-- Crawlability issues
-- Indexability problems
-- Security concerns
-- Core Web Vitals status
-
-### Content Quality
-- E-E-A-T assessment
-- Thin content pages
-- Duplicate content issues
-- Readability scores
-
-### On-Page SEO
-- Title tag issues
-- Meta description problems
-- Heading structure
-- Internal linking gaps
-
-### Schema & Structured Data
-- Current implementation
-- Validation errors
-- Missing opportunities
-
-### Performance
-- LCP, INP, CLS scores
-- Resource optimization needs
-- Third-party script impact
-
-### Images
-- Missing alt text
-- Oversized images
-- Format recommendations
-
-### AI Search Readiness
-- Citability score
-- Structural improvements
-- Authority signals
-
-## Priority Definitions
-
-- **Critical**: Blocks indexing or causes penalties (fix immediately)
-- **High**: Significantly impacts rankings (fix within 1 week)
-- **Medium**: Optimization opportunity (fix within 1 month)
-- **Low**: Nice to have (backlog)
-
----
-
-## Live Data Insights (MCP Overlay)
-
-> This section appears only when MCP data sources are available. The static analysis above is complete and unchanged regardless of MCP availability.
-
-### MCP Availability Check
-
-Follow the self-contained check pattern from `seo/references/mcp-degradation.md`:
-1. Use ToolSearch with query "+ahrefs" — if tools returned, Ahrefs is available
-2. Use ToolSearch with query "+google-search-console" — if tools returned, GSC is available
-3. Proceed with whichever MCPs are available; skip sections for unavailable MCPs
-
-### Domain Authority Context (Ahrefs)
-
-If Ahrefs available: after completing the static scoring step, fetch domain-level metrics via `site-explorer-metrics` for the target domain (bare domain, no https://). Display a `### Domain Authority Context` section:
-
+### 4. Build XLSX
+Run `skills/seo/scripts/build_audit_xlsx.py`:
 ```
-### Domain Authority Context
-
-| Metric | Value |
-|--------|-------|
-| Domain Rating (DR) | XX/100 |
-| Ahrefs Rank | #XX,XXX |
-| Total Backlinks | XX,XXX |
-| Referring Domains | X,XXX |
-| Organic Keywords | XX,XXX |
-| Est. Monthly Organic Traffic | XX,XXX visits |
+python build_audit_xlsx.py \
+    --crawl <work_dir>/crawl_results.json \
+    --site-name "example.com/blog" \
+    --out ~/Desktop/seo-audit-example.com-YYYY-MM-DD.xlsx \
+    [--gsc-top-pages <work_dir>/gsc_top_pages.json] \
+    [--gsc-queries <work_dir>/gsc_queries.json] \
+    [--gsc-devices <work_dir>/gsc_devices.json] \
+    [--ahrefs-metrics <work_dir>/ahrefs_metrics.json] \
+    [--ahrefs-top-pages <work_dir>/ahrefs_top_pages.json] \
+    [--ahrefs-keywords <work_dir>/ahrefs_keywords.json] \
+    [--dr 92] \
+    [--brand-regex "brand|brnd|brnad"]
 ```
 
-Annotate the SEO Health Score line with: *(Data enriched with live Ahrefs metrics)*
+See `skills/seo-audit/scripts/README.md` for the JSON shapes each
+`--*` flag expects.
 
-**Note:** All monetary values (`traffic_cost`, `cpc`) from Ahrefs are in cents — divide by 100 before displaying as USD.
+### 5. Report summary to user
+After the XLSX is written, print to the chat:
+- Output path + file size.
+- Overall score and the 5 most important findings (pulled from the Executive
+  Summary sheet).
+- Any missing MCP data (so the user knows which sheets are omitted).
+- Invite the user to open the file and work the Action Plan using the Status
+  dropdown.
 
-### Indexing Status (GSC)
+## Scoring weights
 
-If GSC available: fetch indexing coverage using `get_indexing_status` for up to 20 top pages. Add a `### Indexing Status` section:
+| Category | Weight | What drives the score |
+|---|---|---|
+| Technical SEO | 25% | Hreflang in HTML, HTTPS/headers, robots, canonicals |
+| Content Quality | 25% | Thin-content ratio, duplicate titles / meta |
+| On-Page SEO | 20% | Title length, meta length, H1 count ratios |
+| Schema / Structured Data | 10% | Fraction of pages with ≥1 JSON-LD block |
+| Performance (CWV) | 10% | Default 70; override with real PageSpeed numbers |
+| Images | 5% | Fraction of pages with all images tagged |
+| AI Search Readiness | 5% | Derived from schema + thin-content fraction |
 
-```
-### Indexing Status (Google Search Console)
+## Priority definitions
 
-- Indexed pages: XX
-- Not indexed: XX
-  - Top reasons: [reason 1], [reason 2]
-  - Non-indexed pages: [url1], [url2], ...
+| Priority | Meaning | SLA |
+|---|---|---|
+| **Critical** | Blocks indexing / rich results / causes penalty | Fix immediately |
+| **High** | Significantly impacts rankings or CTR | Within 1 week |
+| **Medium** | Optimisation opportunity | Within 1 month |
+| **Low** | Nice to have | Backlog |
 
-> Note: GSC property format — use sc-domain: for domain properties or full https:// URL for URL-prefix properties.
-```
+## Effort definitions
 
-### Top Performing Pages (GSC)
+| Effort | Meaning |
+|---|---|
+| **Easy** | Under 1 hour (copy change, single-file edit) |
+| **Medium** | A few hours to a day (template change, schema generator) |
+| **Hard** | Multi-day / cross-team (rewrites, performance work) |
 
-If GSC available: fetch `get_search_analytics` for the site's top pages (last 28 days, sorted by clicks). Add a `### Top Performing Pages` section:
+## References used in the workbook
 
-```
-### Top Performing Pages (Google Search Console — Last 28 Days)
+Every finding row in the XLSX links to the specific Google / web.dev /
+MDN document that justifies the fix. See `skills/seo/references/` for the
+maintained reference set, and the "Google References" sheet in every output
+workbook for the full list with live hyperlinks.
 
-| Page | Clicks | Impressions | CTR | Avg Position |
-|------|--------|-------------|-----|--------------|
-| /page-1 | X,XXX | XX,XXX | X.X% | X.X |
-| /page-2 | ... | ... | ... | ... |
+## Common pitfalls
 
-> CTR displayed as percentage (API returns decimal — multiply by 100 for display).
-```
+- **macOS Python SSL** — system Python often lacks a cert bundle. Pass
+  `--no-ssl-verify` to `crawl_site.py`.
+- **GSC "Multiple accounts found"** — always pass `account=` when
+  more than one alias exists.
+- **Ahrefs `prefix` mode needs `www.`** — `zoho.com/campaigns/` returns
+  zero; `www.zoho.com/campaigns/` returns the correct subfolder data.
+- **Ahrefs `subdomains` mode returns whole-domain metrics** — do not use
+  it for subfolder audits.
+- **Ahrefs monetary values are cents** — builder divides by 100 for display.
+- **Hreflang** — the sitemap may declare it while the HTML does not.
+  Google accepts either; flag HTML-missing as a quality improvement, not a
+  blocker, unless sitemap is also missing them.
 
----
+## Python dependencies
 
-## Data Sources
+Added in `skills/seo/requirements.txt`:
+- `openpyxl>=3.1,<4.0` — XLSX build with data validation and conditional
+  formatting.
 
-Always append this footer to the audit output:
-
-| Source | Status | Data Provided |
-|--------|--------|---------------|
-| Static Analysis | Always available | Crawl, scoring, on-page, technical, content, schema, performance |
-| Ahrefs MCP | Available / Not connected | DR, backlinks, referring domains, organic keywords, traffic |
-| GSC MCP | Available / Not connected | Indexing coverage, top-performing pages, clicks, impressions |
+Crawler uses only the Python standard library plus `concurrent.futures`.
