@@ -185,15 +185,20 @@ def infer_page_type(url: str) -> str:
 
 
 def recommend_schema(ptype: str) -> str:
+    # NOTE: FAQPage rich results are restricted since Aug 2023 to gov/health
+    # authoritative sites only — DO NOT recommend for commercial pages.
+    # NOTE: Sitelinks Search Box was removed from Google Search on 21 Nov 2024;
+    # WebSite.potentialAction SearchAction no longer triggers any feature.
+    # HowTo rich results fully removed Sept 2023 — never recommend.
     return {
-        "Homepage": "Organization + WebSite (with SearchAction) + SoftwareApplication",
-        "Pricing": "Product + Offer + FAQPage (if Q&As) + BreadcrumbList",
+        "Homepage": "Organization + WebSite + SoftwareApplication",
+        "Pricing": "Product + Offer + BreadcrumbList",
         "Help / API docs": "TechArticle + BreadcrumbList",
         "Webinar / Event": "Event + VideoObject + BreadcrumbList",
         "Case study": "Article + Organization (customer) + BreadcrumbList",
         "Blog / guide": "Article + BreadcrumbList + Person (author)",
         "Integration": "SoftwareApplication + BreadcrumbList",
-        "Competitor comparison": "Article + FAQPage + BreadcrumbList",
+        "Competitor comparison": "Article + BreadcrumbList",
         "Feature page": "SoftwareApplication feature + BreadcrumbList",
         "Utility (login/signup)": "Consider noindex OR WebPage + BreadcrumbList",
         "Solution / industry": "Service + BreadcrumbList",
@@ -221,12 +226,11 @@ REFS_TABLE = [
     ("Organization schema", "https://developers.google.com/search/docs/appearance/structured-data/organization"),
     ("Product schema", "https://developers.google.com/search/docs/appearance/structured-data/product"),
     ("SoftwareApplication schema", "https://developers.google.com/search/docs/appearance/structured-data/software-app"),
-    ("FAQPage schema", "https://developers.google.com/search/docs/appearance/structured-data/faqpage"),
+    ("FAQPage schema (GOV/HEALTH ONLY since Aug 2023)", "https://developers.google.com/search/docs/appearance/structured-data/faqpage"),
     ("BreadcrumbList schema", "https://developers.google.com/search/docs/appearance/structured-data/breadcrumb"),
     ("Article schema", "https://developers.google.com/search/docs/appearance/structured-data/article"),
     ("VideoObject schema", "https://developers.google.com/search/docs/appearance/structured-data/video"),
     ("Event schema", "https://developers.google.com/search/docs/appearance/structured-data/event"),
-    ("Sitelinks search box (WebSite)", "https://developers.google.com/search/docs/appearance/structured-data/sitelinks-searchbox"),
     ("Internationalization / hreflang", REF_HREFLANG),
     ("Canonical tag guide", "https://developers.google.com/search/docs/crawling-indexing/canonicalization"),
     ("Sitemaps overview", "https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview"),
@@ -326,9 +330,9 @@ def build_executive_summary(wb, site: str, ok: list[dict], scores: dict, ahrefs_
         ("", "", ""),
         ("TOP CRITICAL FINDINGS", "", ""),
         (f"{no_schema}/{n} pages have no JSON-LD schema", "CRITICAL" if no_schema / n > 0.5 else "HIGH",
-         "Add Organization + WebSite schema globally, then per-page types (Product, FAQPage, BreadcrumbList)."),
-        (f"{no_hreflang}/{n} pages have no hreflang in HTML", "CRITICAL" if no_hreflang / n > 0.5 else "HIGH",
-         "Mirror sitemap hreflang into HTML <head>."),
+         "Add Organization + WebSite schema globally, then per-page types (Product, BreadcrumbList, Article). Do NOT use FAQPage on commercial pages (gov/health only since Aug 2023) or SoftwareApplication.potentialAction SearchAction (Sitelinks SearchBox removed Nov 2024)."),
+        (f"{no_hreflang}/{n} pages have no hreflang in HTML", "MEDIUM",
+         "If sitemap already declares hreflang, HTML tags are optional — Google treats the three methods as equivalent. Pick ONE and keep it consistent."),
         (f"{thin}/{n} pages have under 300 words", "HIGH", "Expand thin utility pages or noindex them."),
         (f"{h1_bad}/{n} pages have missing or multiple H1s", "HIGH", "Exactly one <h1> per page."),
     ]
@@ -373,13 +377,13 @@ def build_action_plan(wb, ok: list[dict], crawl_meta: dict) -> None:
         actions.append(("Critical", "Medium", "Schema",
                         f"No JSON-LD schema on {no_schema}/{n} pages",
                         f"{no_schema} pages",
-                        "Add Organization + WebSite schema globally. Per-page: Product/FAQPage/BreadcrumbList/Article as fits page type. See 'Schema Missing' tab for per-URL recommendation.",
+                        "Add Organization + WebSite schema globally. Per-page: Product/BreadcrumbList/Article as fits page type. See 'Schema Missing' tab for per-URL recommendation. NOTE: FAQPage rich results are restricted to gov/health sites since Aug 2023; HowTo and Sitelinks SearchBox have been removed from Google — do not recommend.",
                         "Dev", REF_SCHEMA))
     if no_hreflang:
         actions.append(("Critical" if no_hreflang / n > 0.5 else "High", "Medium", "Hreflang",
                         f"No hreflang tags in HTML on {no_hreflang}/{n} pages",
                         f"{no_hreflang} pages",
-                        "Emit <link rel='alternate' hreflang='x'> tags in <head> for every locale variant. Google recommends dual declaration (sitemap + HTML).",
+                        "Google says the three methods (HTML <link>, HTTP Link: header, XML sitemap) are equivalent — pick ONE and keep it consistent. If the sitemap already declares hreflang, adding HTML tags is optional, not required.",
                         "Dev", REF_HREFLANG))
     if no_h1:
         actions.append(("High", "Easy", "On-page",
@@ -393,27 +397,27 @@ def build_action_plan(wb, ok: list[dict], crawl_meta: dict) -> None:
                         "Dev", REF_H1))
     if t_long:
         actions.append(("High", "Easy", "Titles",
-                        f"{t_long} titles exceed 65 characters (truncate in SERPs)", f"{t_long} pages",
-                        "Shorten to ≤60 chars. Format: 'Primary Keyword — Benefit | Brand'.",
+                        f"{t_long} titles over 65 chars (heuristic — may truncate in SERPs)", f"{t_long} pages",
+                        "Google states no numeric limit; titles are 'truncated to device width'. Common heuristic: ~60 chars. Format: 'Primary Keyword — Benefit | Brand'.",
                         "Marketing", REF_TITLE))
     if t_short:
         actions.append(("High", "Easy", "Titles",
-                        f"{t_short} titles under 30 characters", f"{t_short} pages",
-                        "Expand to 50-60 chars with primary keyword + value prop.",
+                        f"{t_short} titles under 30 chars (heuristic)", f"{t_short} pages",
+                        "No Google-stated minimum. Heuristic: expand to ~50-60 chars to use available SERP width. Must be descriptive, unique, and match page intent.",
                         "Marketing", REF_TITLE))
     if m_none:
         actions.append(("High", "Easy", "Meta desc",
                         f"{m_none} pages missing meta description", f"{m_none} pages",
-                        "Write 120-155 char description with keyword + CTA.",
+                        "Google writes snippets itself when missing; provided meta desc can improve CTR. No official length, but ~120-155 chars is a common pixel-width heuristic.",
                         "Marketing", REF_META))
     if m_short:
         actions.append(("High", "Easy", "Meta desc",
-                        f"{m_short} pages with meta description <120 chars", f"{m_short} pages",
-                        "Expand to 120-155 chars.", "Marketing", REF_META))
+                        f"{m_short} pages with meta description <120 chars (heuristic)", f"{m_short} pages",
+                        "No Google-stated minimum. Heuristic: expand to ~120-155 chars to use available snippet space.", "Marketing", REF_META))
     if m_long:
         actions.append(("High", "Easy", "Meta desc",
-                        f"{m_long} pages with meta description >160 chars", f"{m_long} pages",
-                        "Trim to ≤155 chars.", "Marketing", REF_META))
+                        f"{m_long} pages with meta description >160 chars (heuristic — may truncate)", f"{m_long} pages",
+                        "Google states no numeric limit. Heuristic: trim to ~155 chars to avoid truncation on desktop SERPs.", "Marketing", REF_META))
     if thin:
         actions.append(("High", "Medium", "Content",
                         f"{thin} pages under 300 words (thin content)", f"{thin} pages",
@@ -436,8 +440,8 @@ def build_action_plan(wb, ok: list[dict], crawl_meta: dict) -> None:
          "Run PageSpeed Insights on top 10 pages. Targets: LCP ≤2.5s, INP ≤200ms, CLS ≤0.1 at 75th pct mobile.",
          "Dev", "https://web.dev/articles/vitals"),
         ("Medium", "Medium", "AI Search",
-         "Create llms.txt file", "Root domain",
-         "Create /llms.txt listing key pages for LLM crawlers. Improves ChatGPT / Perplexity citation accuracy.",
+         "Create llms.txt file (community proposal, not Google-endorsed)", "Root domain",
+         "Create /llms.txt listing key pages for LLM crawlers. NOTE: llms.txt is a community proposal (Answer.dev) — Google has no official stance. Some AI tools honour it; results vary.",
          "Dev", "https://llmstxt.org/"),
     ])
 
@@ -515,19 +519,19 @@ def build_on_page_issues(wb, ok: list[dict]) -> None:
     for p in ok:
         u = p["url"]
         if p["title_len"] == 0:
-            rows.append(("Critical", u, "Title missing", "(empty)", "", "Add unique 50-60 char title.", REF_TITLE))
+            rows.append(("Critical", u, "Title missing", "(empty)", "", "Add unique descriptive title. Google states no length limit; ~50-60 chars is a community heuristic.", REF_TITLE))
         elif p["title_len"] < 30:
-            rows.append(("High", u, "Title too short", p["title"], f"{p['title_len']} chars", "Expand to 50-60 chars with primary keyword.", REF_TITLE))
+            rows.append(("High", u, "Title too short (heuristic)", p["title"], f"{p['title_len']} chars", "No Google-stated minimum; heuristic ~50-60 chars. Expand with primary keyword + value prop.", REF_TITLE))
         elif p["title_len"] > 65:
-            rows.append(("High", u, "Title too long", p["title"], f"{p['title_len']} chars — truncated in SERPs", "Shorten to ≤60 chars.", REF_TITLE))
+            rows.append(("High", u, "Title too long (heuristic — may truncate)", p["title"], f"{p['title_len']} chars", "Google states no limit — titles are truncated to device width. Heuristic: keep ≤60 chars.", REF_TITLE))
         if "&#039;" in p["title"] or "&amp;" in p["title"]:
             rows.append(("Low", u, "Title has HTML entity", p["title"], "encoded char", "Replace entity with real character in CMS.", REF_TITLE))
         if p["meta_desc_len"] == 0:
-            rows.append(("Critical", u, "Meta desc missing", "(empty)", "", "Write 120-155 char description.", REF_META))
+            rows.append(("Critical", u, "Meta desc missing", "(empty)", "", "Google generates a snippet automatically when missing. Providing one can improve CTR. No official length — common heuristic ~120-155 chars.", REF_META))
         elif p["meta_desc_len"] < 120:
-            rows.append(("Medium", u, "Meta desc too short", p["meta_desc"], f"{p['meta_desc_len']} chars", "Expand to 120-155 chars.", REF_META))
+            rows.append(("Medium", u, "Meta desc short (heuristic)", p["meta_desc"], f"{p['meta_desc_len']} chars", "No Google-stated minimum; heuristic ~120-155 chars to use available snippet space.", REF_META))
         elif p["meta_desc_len"] > 160:
-            rows.append(("Medium", u, "Meta desc too long", p["meta_desc"][:120] + "…", f"{p['meta_desc_len']} chars — truncated", "Trim to ≤155 chars.", REF_META))
+            rows.append(("Medium", u, "Meta desc long (heuristic — may truncate)", p["meta_desc"][:120] + "…", f"{p['meta_desc_len']} chars", "Google states no limit — snippets truncate to device width. Heuristic: keep ≤155 chars.", REF_META))
         if p["h1_count"] == 0:
             rows.append(("High", u, "Missing H1", "(none)", "", "Add a single descriptive <h1>.", REF_H1))
         elif p["h1_count"] > 1:
@@ -588,8 +592,9 @@ def build_hreflang_missing(wb, ok: list[dict]) -> None:
     add_title_row(ws, f"Hreflang Missing from HTML — {len(missing)} pages", len(headers))
     add_header_row(ws, 2, headers)
 
-    note = ("NOTE: Hreflang may be in sitemap but not emitted in HTML <head>. "
-            "Google accepts both; dual declaration is strongly recommended for reliability.")
+    note = ("NOTE: Google says the three hreflang methods (HTML <link>, HTTP Link: header, XML sitemap) "
+            "are equivalent — pick ONE and keep it consistent to avoid maintenance drift. "
+            "If hreflang is already in the sitemap, adding HTML tags is optional, not required.")
     ws.cell(row=2, column=5).comment = Comment(note, "audit")
 
     start = 3
