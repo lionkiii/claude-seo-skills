@@ -1,4 +1,9 @@
+<!-- Updated: 2026-04-24 -->
+<!-- Last verified against live Google docs: 2026-04-24 -->
+<!-- Next verification due: 2026-07-24 -->
 # Content Quality Gates
+
+> Word-count thresholds below are **internal quality gates**, not Google policy. Google explicitly states there is no magic word count — thresholds are informed by observed performance of pages in each category.
 
 ## Minimum Word Counts by Page Type
 

@@ -1,6 +1,9 @@
+<!-- Updated: 2026-04-24 -->
+<!-- Last verified against live Google docs: 2026-04-24 -->
+<!-- Next verification due: 2026-07-24 -->
 # E-E-A-T Evaluation Framework
 ## Updated per Google Quality Rater Guidelines — September 11, 2025
-## Plus December 2025 Core Update Implications
+## Plus December 2025 and March 2026 Core Update Implications
 
 ## Overview
 
@@ -8,6 +11,10 @@ E-E-A-T = **E**xperience, **E**xpertise, **A**uthoritativeness, **T**rustworthin
 
 Trustworthiness is the most important factor. It is assessed based on the
 other three signals plus direct trust indicators.
+
+> ⚠️ **Important framing (Google SEO Starter Guide):** E-E-A-T is **not itself a ranking factor**. It is a **concept** used by Google's third-party quality raters to evaluate search results — raters have no direct levers over rankings. Google's systems are designed to surface content that exhibits E-E-A-T-aligned behaviours, but there is no "E-E-A-T score" being measured. Audit checklists should target the underlying behaviours (first-person experience markers, author credentials, citation quality, transparent authorship, site reputation) rather than presenting E-E-A-T as a direct signal.
+>
+> Similarly, the former **Helpful Content System** is no longer a separate system: it was **merged into core ranking in the March 2024 core update**. Current Google docs refer only to "core ranking systems" and link to "Core updates." Do not write audit recommendations as "the HCU will demote X" — phrase as "core ranking rewards helpful, people-first content."
 
 ## CRITICAL: December 2025 Core Update
 

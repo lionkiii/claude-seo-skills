@@ -40,7 +40,8 @@ As of 2025-2026, AI companies actively crawl the web to train models and power A
 | ClaudeBot | Anthropic | `ClaudeBot` | Model training |
 | PerplexityBot | Perplexity | `PerplexityBot` | Search index + training |
 | Bytespider | ByteDance | `Bytespider` | Model training |
-| Google-Extended | Google | `Google-Extended` | Gemini training (NOT search) |
+| Google-Extended | Google | `Google-Extended` | Gemini training + grounding opt-out (NOT search) |
+| Google-CloudVertexBot | Google | `Google-CloudVertexBot` | Vertex AI Agent grounding |
 | CCBot | Common Crawl | `CCBot` | Open dataset |
 
 **Key distinctions:**
@@ -88,7 +89,7 @@ Allow: /
 ### 4. URL Structure
 - Clean URLs: descriptive, hyphenated, no query parameters for content
 - Hierarchy: logical folder structure reflecting site architecture
-- Redirects: no chains (max 1 hop), 301 for permanent moves
+- Redirects: no chains (max 1 hop), **301 or 308 for permanent moves** (Google treats them as equivalent since the 2026-04-14 doc update); 302/303/307 are temporary and keep the source URL in SERPs
 - URL length: flag >100 characters
 - Trailing slashes: consistent usage
 
@@ -133,6 +134,19 @@ Google updated its JavaScript SEO documentation in December 2025 with critical c
 - Check if site supports IndexNow for Bing, Yandex, Naver
 - Supported by search engines other than Google
 - Recommend implementation for faster indexing on non-Google engines
+
+### 10. Spam policy compliance (2026 additions)
+
+Newly codified spam signals — audits should check these alongside the classic spam policy items (cloaking, doorway pages, hidden text, keyword stuffing, etc.):
+
+- **Back-button hijacking** (new spam policy, announced 2026-04-13, enforcement starts **2026-06-15**): scripts that prevent or hijack the browser back button, or that redirect the user to unrequested pages when back is pressed, are a "malicious practices" violation. Grep the site for `history.pushState` / `history.replaceState` / `popstate` patterns used to trap users. Report any found as a CRITICAL pre-deadline issue.
+- **Scaled content abuse — explicit gen AI call-out** (spam policy updated 2026-04-13): *"Using generative AI tools or other similar tools to generate many pages without adding value for users."* AI-assisted content is allowed when it adds genuine user value; scaled AI content churn is spam. Use the `seo-ai-content-check` skill to detect telltale patterns (boilerplate sentence structure, low topical depth at scale).
+- **Site reputation abuse (parasite SEO)**: hosting third-party content on your domain primarily to exploit your domain's ranking signals. Audit `/guest-posts/`, `/partner-content/`, and similar subdirectories.
+- **Expired domain abuse**: acquiring an expired domain and repurposing its authority for thin/spam content. Flag during domain migration audits.
+
+### 11. Robots meta placement (2026-03-24 doc clarification)
+
+- Google now documents how it handles `<meta name="robots">` tags found OUTSIDE `<head>` (e.g. injected into `<body>` by JS or analytics code): such tags are still honoured if present in the rendered DOM. But for reliability, keep robots meta in `<head>` and serve it in the initial server-rendered HTML (not JS-injected). Mixed signals (one directive in head, another in body) lead to the most restrictive winning.
 
 ## Output
 

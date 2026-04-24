@@ -39,7 +39,7 @@ Fetch old URL with WebFetch and follow redirects (track each hop):
 
 Evaluate:
 - Final destination matches expected `new` URL: PASS — mismatch: FAIL
-- Redirect type is 301: PASS — 302/307: WARN (temporary redirects pass less link equity)
+- Redirect type is **301 or 308**: PASS (Google treats 308 as equivalent to 301 since the 2026-04-14 doc update). 302/303/307: WARN (temporary redirects keep the source URL in SERPs and pass less link equity)
 - Hop count 1: PASS — hop count 2: WARN — hop count >2: FAIL (redirect chain too long)
 - Direct 200 on old URL (no redirect): FAIL (old page still live, not redirected)
 
