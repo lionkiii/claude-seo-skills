@@ -15,13 +15,24 @@ allowed-tools:
 
 # llms.txt — Generate, Validate & Audit
 
+<!-- Updated: 2026-06-10 -->
+
 Analyze, generate, or validate llms.txt files per the llms.txt specification
 (proposed by Jeremy Howard / Answer.AI). The llms.txt standard provides a
 Markdown file at `/llms.txt` that helps LLMs understand a website's content
 structure — similar to how robots.txt guides traditional crawlers.
 
-**Adoption:** 950+ sites including Anthropic, Cloudflare, Docker, Vercel,
-Stripe, FastHTML, Cursor, Hugging Face, and many more.
+**Adoption:** Adopted by thousands of sites including Anthropic, Cloudflare,
+Docker, Vercel, Stripe, FastHTML, Cursor, Hugging Face, and many more.
+
+### Lighthouse "Agentic Browsing" audit
+
+Chrome Lighthouse now includes an **Agentic Browsing** audit category with a
+dedicated llms.txt check. Lighthouse flags a page if a server error occurs
+when fetching `/llms.txt`; if the file is simply absent (404), the audit is
+marked Not Applicable since the file is optional. Users can validate their
+llms.txt presence by running Lighthouse. Reference:
+https://developer.chrome.com/docs/lighthouse/agentic-browsing/llms-txt
 
 ## Inputs
 
@@ -178,7 +189,7 @@ When user says "validate":
 
 ### What is llms.txt?
 > llms.txt is a proposed standard (llmstxt.org) that provides LLMs with
-> a structured Markdown overview of your site. 950+ sites have adopted it.
+> a structured Markdown overview of your site. Thousands of sites have adopted it.
 > While AI platform adoption of the standard is still emerging, early
 > adoption positions your site for AI search visibility — similar to how
 > early schema.org adoption paid off for rich snippets.

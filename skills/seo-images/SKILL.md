@@ -10,6 +10,8 @@ description: >
 
 # Image Optimization Analysis
 
+<!-- Updated: 2026-06-10 -->
+
 ## Checks
 
 ### Alt Text
@@ -17,6 +19,9 @@ description: >
 - Descriptive: describes the image content, not "image.jpg" or "photo"
 - Includes relevant keywords where natural, not keyword-stuffed
 - Length: 10-125 characters
+- Place images near relevant text on pages relevant to the image subject —
+  Google uses alt text along with surrounding page content to understand
+  the image (per Google Images best practices)
 
 **Good examples:**
 - "Professional plumber repairing kitchen sink faucet"
@@ -43,8 +48,8 @@ Recommend compression to target thresholds where possible without quality loss.
 ### Format
 | Format | Browser Support | Use Case |
 |--------|-----------------|----------|
-| WebP | 97%+ | Default recommendation |
-| AVIF | 92%+ | Best compression, newer |
+| WebP | Universal (~100%) | Default recommendation |
+| AVIF | ~95%+ | Best compression, newer |
 | JPEG | 100% | Fallback for photos |
 | PNG | 100% | Graphics with transparency |
 | SVG | 100% | Icons, logos, illustrations |
@@ -63,7 +68,7 @@ Use progressive enhancement with the most efficient format first:
 </picture>
 ```
 
-The browser will use the first supported format. Current browser support: AVIF 93.8%, WebP 95.3%.
+The browser will use the first supported format. Current browser support: AVIF ~95%+, WebP universal.
 
 #### JPEG XL — Emerging Format
 
@@ -105,6 +110,14 @@ Add `fetchpriority="high"` to your hero/LCP image to prioritize its download in 
 ```
 
 **Critical:** Do NOT lazy-load above-the-fold/LCP images. Using `loading="lazy"` on LCP images directly harms LCP scores. Reserve `loading="lazy"` for below-the-fold images only.
+
+#### LCP Image Subparts
+
+LCP time for an image breaks down into four subparts:
+**TTFB → resource load delay → resource load time → element render delay.**
+`<link rel="preload">` plus `fetchpriority="high"` attack the resource load
+delay — they get the LCP image discovered and queued at top priority as early
+as possible.
 
 ### `decoding="async"` for Non-LCP Images
 

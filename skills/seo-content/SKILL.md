@@ -16,9 +16,18 @@ allowed-tools:
 
 # Content Quality & E-E-A-T Analysis
 
-## E-E-A-T Framework (updated Sept 2025 QRG)
+<!-- Updated: 2026-06-10 -->
+
+## E-E-A-T Framework (per Google's Search Quality Rater Guidelines and the "Creating helpful, reliable, people-first content" doc)
 
 Read `seo/references/eeat-framework.md` for full criteria.
+
+> **How Google uses E-E-A-T:** E-E-A-T itself is NOT a direct ranking factor.
+> Google's automated systems use a mix of factors to reward content people
+> find helpful; quality raters use E-E-A-T to evaluate whether those systems
+> are working — rater data is not used directly in ranking.
+> Of the E-E-A-T family, **Trust is the most important member** — the other
+> three contribute to trust, and content need not demonstrate all of them.
 
 ### Experience (first-hand signals)
 - Original research, case studies, before/after results

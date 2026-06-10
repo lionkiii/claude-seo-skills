@@ -12,6 +12,8 @@ allowed-tools:
 
 # AI Crawler Robots.txt Audit
 
+<!-- Updated: 2026-06-10 -->
+
 Analyzes a site's robots.txt specifically for AI crawler access policies.
 Complements `/seo-technical` (which does a broad robots.txt check) with
 deep AI-specific analysis.
@@ -20,25 +22,44 @@ deep AI-specific analysis.
 
 ## AI Crawler Registry
 
+### Training crawlers (respect robots.txt, used for model training)
+
 | Bot Name | Owner | Purpose |
 |---|---|---|
-| GPTBot | OpenAI | Training data + ChatGPT web search |
-| OAI-SearchBot | OpenAI | ChatGPT search only (not training) |
-| ChatGPT-User | OpenAI | ChatGPT browsing (real-time) |
+| GPTBot | OpenAI | Training data collection |
 | ClaudeBot | Anthropic | Training data collection |
-| anthropic-ai | Anthropic | Anthropic web crawler |
-| PerplexityBot | Perplexity | AI search engine |
-| Google-Extended | Google | Gemini / AI training (not Search) |
-| Bytespider | ByteDance | TikTok / AI training |
-| CCBot | Common Crawl | Open dataset used by many AI models |
+| Google-Extended | Google | Robots.txt control for Gemini / AI training (not Search) |
 | Applebot-Extended | Apple | Apple Intelligence training |
+| CCBot | Common Crawl | Open dataset used by many AI models |
+| Bytespider | ByteDance | TikTok / AI training |
 | cohere-ai | Cohere | AI model training |
 | FacebookBot | Meta | Meta AI training |
-| Meta-ExternalAgent | Meta | Meta AI browsing agent |
+| Meta-ExternalAgent | Meta | Meta AI training crawler |
 | Amazonbot | Amazon | Alexa / AI training |
 | Diffbot | Diffbot | AI knowledge graph |
 | ImagesiftBot | ImagesiftBot | AI image training |
 | Omgili | Webz.io | AI data feeds |
+
+### User-triggered / search crawlers (fetch on behalf of a live user or search index)
+
+Blocking these removes you from AI search answers and citations.
+
+| Bot Name | Owner | Purpose |
+|---|---|---|
+| OAI-SearchBot | OpenAI | ChatGPT search index (not training) |
+| ChatGPT-User | OpenAI | ChatGPT browsing (real-time, user-triggered) |
+| PerplexityBot | Perplexity | AI search engine index |
+| Perplexity-User | Perplexity | User-triggered fetch for Perplexity answers |
+| anthropic-ai | Anthropic | Claude web fetch |
+| Google-CloudVertexBot | Google | Vertex AI Agents — crawls on site owners' request |
+| DuckAssistBot | DuckDuckGo | DuckAssist AI answers |
+| MistralAI-User | Mistral | User-triggered fetch for Le Chat citations |
+| Meta-ExternalFetcher | Meta | User-initiated Meta AI fetches |
+
+> **Important:** Blocking training bots ≠ blocking AI search visibility.
+> Blocking *training* crawlers only opts you out of model training.
+> Blocking *user-triggered / search* crawlers removes your site from AI
+> answers and citations (ChatGPT search, Perplexity, DuckAssist, etc.).
 
 ## Inputs
 
