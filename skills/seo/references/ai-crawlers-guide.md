@@ -104,6 +104,7 @@ for AI crawler policies via `/seo-robots-ai`.
 | DeepSeekBot | `DeepSeekBot` | DeepSeek | AI training (note: may not identify in UA) |
 | DuckAssistBot | `DuckAssistBot` | DuckDuckGo | AI-assisted search answers |
 | Youbot | `Youbot` | You.com | AI search training |
+| MistralAI-User | `MistralAI-User` | Mistral | User-triggered fetch for Le Chat citations |
 | diffbot | `diffbot` | Diffbot | Web data extraction / knowledge graph |
 | ImagesiftBot | `ImagesiftBot` | Hive | Image classification training |
 | img2dataset | `img2dataset` | LAION | Image dataset collection |
@@ -125,7 +126,7 @@ Critical distinction for robots.txt strategy:
 ### Search/Retrieval Crawlers (fetch content for real-time AI search answers)
 `OAI-SearchBot`, `ChatGPT-User`, `Claude-User`, `Claude-SearchBot`,
 `PerplexityBot`, `Perplexity-User`, `Meta-ExternalFetcher`,
-`DuckAssistBot`, `cohere-ai`, `Youbot`
+`DuckAssistBot`, `cohere-ai`, `Youbot`, `MistralAI-User`
 
 > **Best practice**: Block training crawlers to protect content, allow search
 > crawlers for AI search visibility. This mirrors how most publishers operate.
