@@ -72,10 +72,17 @@ for file in ${STAGED_FILES}; do
         WARNINGS=$((WARNINGS + 1))
     fi
 
-    # Check for deprecated schema types
-    if grep -qE '"@type"\s*:\s*"(HowTo|SpecialAnnouncement)"' "${file}" 2>/dev/null; then
-        echo "🛑 ${file}: Contains deprecated schema type"
+    # Check for deprecated/retired schema types (HowTo Sep 2023, SpecialAnnouncement Jul 2025,
+    # ClaimReview/VehicleListing Jun 2025, Dataset late 2025)
+    if grep -qE '"@type"\s*:\s*"(HowTo|SpecialAnnouncement|ClaimReview|VehicleListing|Dataset)"' "${file}" 2>/dev/null; then
+        echo "🛑 ${file}: Contains deprecated/retired schema type"
         ERRORS=$((ERRORS + 1))
+    fi
+
+    # FAQPage is restricted to government/healthcare authority sites (Aug 2023)
+    if grep -qE '"@type"\s*:\s*"FAQPage"' "${file}" 2>/dev/null; then
+        echo "⚠️  ${file}: FAQPage rich results are restricted to gov/health sites — verify eligibility"
+        WARNINGS=$((WARNINGS + 1))
     fi
 
     # Check for FID references (should be INP)

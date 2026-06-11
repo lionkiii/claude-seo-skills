@@ -1,18 +1,19 @@
 # Claude SEO Skills
 
-**44 powerful SEO commands for [Claude Code](https://docs.anthropic.com/en/docs/claude-code)** — the most comprehensive SEO toolkit available as Claude Code skills. Run full site audits, analyze backlinks with Ahrefs, track rankings with Google Search Console, research SERPs, generate content briefs, and more — all from your terminal.
+**52 powerful SEO commands for [Claude Code](https://docs.anthropic.com/en/docs/claude-code)** — the most comprehensive SEO toolkit available as Claude Code skills. Run full site audits, analyze backlinks with Ahrefs, track rankings with Google Search Console, research SERPs, generate content briefs, and more — all from your terminal.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-44-green.svg)](#all-44-commands)
+[![Skills](https://img.shields.io/badge/Skills-52-green.svg)](#all-52-commands)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-blueviolet.svg)](https://docs.anthropic.com/en/docs/claude-code)
 
 ## Why Claude SEO Skills?
 
-- **44 dedicated commands** — the largest Claude Code SEO skill set available
+- **52 dedicated commands** — the largest Claude Code SEO skill set available
 - **Live data from Ahrefs** — Domain Rating, backlinks, keyword rankings, competitor analysis, content gaps
 - **Google Search Console integration** — real ranking data, indexing status, traffic drops, keyword cannibalization
 - **Technical SEO audits** — Core Web Vitals, crawlability, security headers, structured data, mobile optimization
-- **Content analysis** — E-E-A-T scoring, AI content detection, readability, keyword optimization
+- **Performance & page experience** — Lighthouse audits, Core Web Vitals deep-dives, Google page-experience self-assessment
+- **Content analysis** — E-E-A-T scoring, helpful-content quality gates, AI content detection, readability, keyword optimization
 - **AI search optimization** — GEO (Generative Engine Optimization) for AI Overviews, ChatGPT, Perplexity
 - **AI readability** — llms.txt generation/validation, AI crawler robots.txt audit
 - **Parallel execution** — site audits delegate to 6 specialist agents for speed
@@ -91,7 +92,7 @@ The installer copies skills and agents to `~/.claude/`, sets up a Python venv, a
 /seo-robots-ai example.com
 ```
 
-## All 44 Commands
+## All 52 Commands
 
 ### Site Audits & Technical SEO
 
@@ -102,6 +103,7 @@ The installer copies skills and agents to `~/.claude/`, sets up a Python venv, a
 | `/seo-page <url>` | Deep single-page analysis — on-page elements, content quality, technical meta, schema, images, performance |
 | `/seo-technical <url>` | Technical SEO audit across 8 categories: crawlability, indexability, security, URL structure, mobile, Core Web Vitals, structured data, JS rendering |
 | `/seo-schema <url>` | Detect, validate, and generate Schema.org structured data (JSON-LD). Covers Article, Product, FAQ, HowTo, LocalBusiness, and more |
+| `/seo-rich-results <url>` | Per-type rich result eligibility check — classifies page type, validates required/recommended properties against Google's per-type docs, produces gap report |
 | `/seo-images <url>` | Image optimization — alt text, file sizes, WebP/AVIF format check, responsive images, lazy loading, CLS prevention |
 | `/seo-sitemap <url>` | Analyze existing XML sitemaps or generate new ones. Cross-references GSC indexing status when available |
 | `/seo-internal-links <url>` | Internal link structure analysis — finds orphan pages, underlinked pages, broken links. Suggests anchor text improvements |
@@ -110,17 +112,28 @@ The installer copies skills and agents to `~/.claude/`, sets up a Python venv, a
 | `/seo-local <url>` | Local SEO audit — NAP consistency, Google Business Profile signals, local schema, citations, review signals |
 | `/seo-log-analysis <file>` | Server log analysis for crawl budget insights — bot vs user traffic, crawl frequency, status codes, wasted crawl budget |
 
+### Performance & Page Experience
+
+| Command | What It Does |
+|---|---|
+| `/seo-lighthouse-audit <url>` | Run Lighthouse audits (CLI or PageSpeed Insights API fallback) — parses category scores and failed audits, maps each to its fix and official Chrome doc |
+| `/seo-core-web-vitals <url>` | Dedicated CWV deep-dive — CrUX field data with lab fallback, LCP subparts diagnosis, INP and CLS playbooks |
+| `/seo-page-experience <url>` | Google page-experience self-assessment — HTTPS, intrusive interstitials, mobile usability, CWV, ad distinguishability |
+
 ### Content & Keywords
 
 | Command | What It Does |
 |---|---|
 | `/seo-content <url>` | Content quality and E-E-A-T analysis with AI citation readiness. Enhanced with Ahrefs keyword data + GSC search queries |
+| `/seo-eeat-audit <url>` | Standalone E-E-A-T scoring rubric (0-5 per dimension) — detectable trust signals with evidence-based recommendations |
+| `/seo-helpful-content <url>` | Pre-publish content-quality gate — Google's people-first self-assessment questions plus spam-policy red flags |
 | `/seo-content-brief <keyword>` | Generate structured SEO content brief from live Ahrefs SERP data + optional GSC overlay. Includes target word count, heading outline, competitor analysis |
 | `/seo-serp <keyword>` | Analyze SERP for any keyword — ranking pages, Domain Rating scores, traffic estimates, content angle analysis |
 | `/seo-markdown-audit <path>` | Audit markdown files before publishing — heading structure, meta description, keyword density, link quality, image alt text, frontmatter |
 | `/seo-ai-content-check <url>` | Detect AI-generated content using pure text analysis — sentence uniformity, vocabulary diversity, repetition patterns, hedging language |
 | `/seo-programmatic <url>` | Programmatic SEO planning for pages generated at scale — template engines, URL patterns, internal linking automation, thin content prevention |
 | `/seo-plan <url>` | Strategic SEO planning — industry-specific templates, competitive analysis, content strategy, implementation roadmap |
+| `/seo-obsidian-kb <sitemap>` | Build an Obsidian knowledge base from a sitemap — bulk-fetches pages via Python, generates Obsidian-optimized notes with parallel agents |
 
 ### Ahrefs Backlink & Keyword Analysis
 
@@ -156,6 +169,7 @@ The installer copies skills and agents to `~/.claude/`, sets up a Python venv, a
 | Command | What It Does |
 |---|---|
 | `/seo-geo <url>` | Optimize for AI search — AI Overviews (SGE), ChatGPT web search, Perplexity. Generative Engine Optimization analysis |
+| `/seo-ai-optimization <url>` | Audit against Google's official AI Optimization guide — AI Overviews / AI Mode readiness, snippet controls, crawlability, citability |
 | `/seo-brand-radar <domain>` | Monitor brand visibility in AI search and traditional search — brand mentions, share of voice, AI citation readiness |
 | `/seo-competitor-pages <domain>` | Generate SEO-optimized "X vs Y" and "alternatives to X" comparison pages — feature matrices, schema markup, conversion elements |
 | `/seo-report <url>` | Generate and save a complete SEO report to disk — configurable sections, multiple output formats |
@@ -215,7 +229,7 @@ Verify it's connected:
 bash scripts/verify-mcp-scope.sh
 ```
 
-Without GSC, all 35 non-GSC commands work perfectly. The 9 GSC commands will show a setup prompt instead.
+Without GSC, all 43 non-GSC commands work perfectly. The 9 GSC commands will show a setup prompt instead.
 
 ## Project Structure
 
@@ -224,7 +238,7 @@ claude-seo-skills/
 ├── .claude-plugin/
 │   ├── plugin.json            # Plugin metadata
 │   └── marketplace.json       # Self-hosted marketplace catalog
-├── skills/                    # 44 skill definitions
+├── skills/                    # 52 skill definitions
 │   ├── seo/                   # Orchestrator + shared references
 │   │   ├── SKILL.md           # Main /seo command router
 │   │   ├── references/        # API refs, quality gates, E-E-A-T framework
@@ -233,7 +247,7 @@ claude-seo-skills/
 │   ├── seo-audit/             # /seo-audit
 │   ├── seo-ahrefs-keywords/   # /seo-ahrefs-keywords
 │   ├── seo-gsc-overview/      # /seo-gsc-overview
-│   └── ...                    # 41 more skill directories
+│   └── ...                    # 49 more skill directories
 ├── agents/                    # 6 specialist agents for parallel audits
 ├── scripts/                   # Install, smoke test, MCP verification
 ├── desktop/                   # Claude Desktop / Claude.ai web edition

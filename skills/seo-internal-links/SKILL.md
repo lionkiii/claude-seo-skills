@@ -2,7 +2,8 @@
 name: seo-internal-links
 description: >
   Analyze internal link structure by crawling a domain. Identifies orphan pages,
-  underlinked pages (fewer than 3 inbound links), and broken internal links.
+  underlinked pages (configurable heuristic, default fewer than 3 inbound links),
+  and broken internal links.
   Suggests anchor text for top 5 underlinked pages. Reuses existing fetch/parse
   scripts. Optional Ahrefs enrichment. Use when user says "internal links",
   "link structure", "orphan pages", "internal linking", "link graph", "anchor text audit".
@@ -15,6 +16,8 @@ allowed-tools:
 ---
 
 # Internal Link Audit
+
+<!-- Updated: 2026-06-10 -->
 
 Crawls a domain to build an internal link graph. Identifies orphan pages, underlinked pages,
 and broken internal links. Suggests anchor text improvements.
@@ -65,8 +68,8 @@ For each crawled page:
 
 **Step 4: Identify Issues**
 
-- **Orphan pages**: Pages discovered via sitemap (`<domain>/sitemap.xml`) or linked from other pages but with 0 inbound internal links. Fetch sitemap first to identify all known URLs.
-- **Underlinked pages**: Pages with < 3 inbound internal links (high priority for internal linking).
+- **Orphan pages** (hard finding): Pages discovered via sitemap (`<domain>/sitemap.xml`) or linked from other pages but with **zero** inbound internal links. Fetch sitemap first to identify all known URLs.
+- **Underlinked pages** (heuristic flag): Pages with fewer inbound internal links than a configurable threshold (default: 3). This threshold is a heuristic for prioritizing internal-linking work — Google defines no numeric minimum, so it is not a Google requirement.
 - **Excessive outbound**: Pages with > 100 outbound internal links (PageRank dilution).
 - **Broken internal links**: For top 20 most-linked pages, verify HTTP status. Flag 4xx/5xx.
 
@@ -77,6 +80,12 @@ For each of the 5 most underlinked pages (fewest inbound links, excluding orphan
 2. Identify top 3 relevant anchor text options based on: H1 noun phrases, title keywords, page URL slug
 3. Find pages in crawl that mention related terms and could link to this page
 4. Output: target URL, suggested anchors (ranked), recommended source pages
+
+Anchor text guidance (per Google's crawlable-links doc,
+https://developers.google.com/search/docs/crawling-indexing/links-crawlable):
+- Write descriptive, reasonably concise link text relevant to the target page
+- Avoid generic anchors like "click here", "read more", or "website"
+- Links must be `<a>` elements with an `href` attribute resolving to a crawlable URL — Google can't reliably extract script-driven pseudo-links
 
 **Step 6: Optional Ahrefs Enrichment**
 
@@ -98,7 +107,7 @@ If Ahrefs available (ToolSearch '+ahrefs'):
 | Total internal links | N |
 | Avg inbound links per page | N.N |
 | Orphan pages found | N |
-| Underlinked pages (<3 inbound) | N |
+| Underlinked pages (below threshold, default <3 inbound) | N |
 | Pages with broken internal links | N |
 
 ### Orphan Pages

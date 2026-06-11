@@ -2,7 +2,7 @@
 name: seo-audit
 description: >
   Full website SEO audit with parallel subagent delegation. Crawls up to 500
-  pages, detects business type, delegates to 6 specialists, generates health
+  pages, detects business type, delegates to up to 7 specialists, generates health
   score. Enhanced with live Ahrefs (DR, backlinks, traffic) and GSC (indexing,
   top pages) data when MCPs are available. Use when user says "audit", "full
   SEO check", "analyze my site", or "website health check".
@@ -15,6 +15,8 @@ allowed-tools:
 ---
 
 # Full Website SEO Audit
+
+<!-- Updated: 2026-06-10 -->
 
 ## Process
 
@@ -29,6 +31,7 @@ allowed-tools:
    - `seo-sitemap` — structure analysis, quality gates, missing pages
    - `seo-performance` — LCP, INP, CLS measurements
    - `seo-visual` — screenshots, mobile testing, above-fold analysis
+   - `seo-ai-optimization` — AI search readiness (AI Overviews eligibility, llms.txt, AI crawler access) (if installed)
 5. **Score** — aggregate into SEO Health Score (0-100)
 6. **Report** — generate prioritized action plan
 

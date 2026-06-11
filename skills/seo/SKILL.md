@@ -1,18 +1,24 @@
 ---
 name: seo
 description: >
-  Comprehensive SEO analysis for any website or business type. Orchestrates 44 sub-skills
-  (44 active): full site audits, technical SEO (CWV/INP), schema, E-E-A-T content quality,
+  Comprehensive SEO analysis for any website or business type. Orchestrates 52 sub-skills
+  (52 active): full site audits, technical SEO (CWV/INP), schema, E-E-A-T content quality,
   images, sitemaps, GEO for AI Overviews, llms.txt generation, AI crawler audit,
   plus live GSC and Ahrefs MCP data. GSC: overview, drops, opportunities, brand-vs-nonbrand,
   cannibalization, compare, content-decay, index-issues, new-keywords. Ahrefs: overview,
   backlinks, keywords, competitors, content-gap, broken-links, new-links, anchor-analysis,
   dr-history, top-pages. Cross-MCP: serp, content-brief, brand-radar, site-audit-pro, report.
-  Local: log-analysis, ai-content-check, internal-links, local, migration-check.
+  Local: log-analysis, ai-content-check, internal-links, local, migration-check, obsidian-kb.
   AI Readability: llms-txt, robots-ai.
+  Performance: lighthouse-audit, core-web-vitals, page-experience.
+  Quality & AI Search: rich-results, ai-optimization, eeat-audit, helpful-content.
   Triggers on: "SEO", "audit", "schema", "Core Web Vitals", "sitemap", "E-E-A-T", "AI Overviews",
   "GEO", "technical SEO", "content quality", "structured data", "GSC", "Ahrefs",
-  "backlinks", "keywords", "search console", "domain rating", "local SEO", "migration".
+  "backlinks", "keywords", "search console", "domain rating", "local SEO", "migration",
+  "lighthouse", "pagespeed", "LCP", "INP", "CLS", "page experience", "interstitials",
+  "mobile friendly", "rich results", "rich snippets", "schema eligibility", "AI optimization",
+  "AI search readiness", "EEAT", "trust signals", "helpful content", "people-first",
+  "content quality gate".
 allowed-tools:
   - Read
   - Grep
@@ -24,8 +30,8 @@ allowed-tools:
 # SEO — Universal SEO Analysis Skill
 
 Comprehensive SEO analysis across all industries (SaaS, local services,
-e-commerce, publishers, agencies). Orchestrates 44 specialized sub-skills
-(44 active) and 6 subagents.
+e-commerce, publishers, agencies). Orchestrates 52 specialized sub-skills
+(52 active) and 6 subagents.
 
 ## Quick Reference
 
@@ -90,6 +96,7 @@ e-commerce, publishers, agencies). Orchestrates 44 specialized sub-skills
 | `/seo internal-links <domain>` | Internal link structure analysis and orphan detection | active |
 | `/seo local <business>` | Local SEO audit (NAP, schema, GBP, citations) | active |
 | `/seo migration-check <old> <new>` | Site migration redirect and SEO validator | active |
+| `/seo obsidian-kb --sitemap <url>` | Build an Obsidian knowledge base from a sitemap | active |
 
 ### Active Commands (Phase 5 — AI Readability)
 
@@ -97,6 +104,18 @@ e-commerce, publishers, agencies). Orchestrates 44 specialized sub-skills
 |---------|-------------|--------|
 | `/seo llms-txt <url\|generate\|validate>` | Generate, validate, or audit llms.txt files | active |
 | `/seo robots-ai <url>` | Audit robots.txt for AI crawler access policies | active |
+
+### Active Commands (Phase 6 — Performance & Quality)
+
+| Command | What it does | Status |
+|---------|-------------|--------|
+| `/seo lighthouse-audit <url>` | Lighthouse audit (CLI or PSI API fallback) with per-audit fixes and Chrome docs | active |
+| `/seo core-web-vitals <url>` | CWV deep-dive — CrUX field data + lab fallback, LCP subparts, INP/CLS playbooks | active |
+| `/seo page-experience <url>` | Page-experience self-assessment — HTTPS, interstitials, mobile usability, CWV, ads | active |
+| `/seo rich-results <url>` | Per-type rich result eligibility check with required/recommended property gap report | active |
+| `/seo ai-optimization <url>` | Audit against Google's AI Optimization guide — AI Overviews / AI Mode readiness | active |
+| `/seo eeat-audit <url>` | Standalone E-E-A-T scoring rubric (0-5 per dimension) with trust signals | active |
+| `/seo helpful-content <url>` | Pre-publish content-quality gate — people-first questions + spam-policy red flags | active |
 
 ## Orchestration Logic
 
@@ -148,9 +167,18 @@ For grouped commands, extract the sub-command and route to the specific sub-skil
 - `/seo ahrefs dr-history <domain>` → load `seo-ahrefs-dr-history/SKILL.md`
 - `/seo ahrefs top-pages <domain>` → load `seo-ahrefs-top-pages/SKILL.md`
 
+### Disambiguation Rules
+
+Some trigger phrases match more than one sub-skill. Route by intent:
+
+- **"AI Overviews" / "AI search"** → `seo-ai-optimization` when the user asks about Google's AI features (AI Overviews, AI Mode) or Google's official guidance; → `seo-geo` when the user targets multiple AI engines (ChatGPT, Perplexity, Claude) or says "GEO" broadly. Default for bare "optimize for AI Overviews": `seo-ai-optimization`.
+- **"Core Web Vitals" / "site speed"** → `seo-core-web-vitals` for a metric-focused diagnosis (field data, LCP/INP/CLS playbooks); → `seo-technical` only when CWV is part of a broader technical audit request. Default for bare "Core Web Vitals": `seo-core-web-vitals`.
+- **"E-E-A-T"** → `seo-eeat-audit` for a standalone E-E-A-T score of a URL or draft; → `seo-content` when the user wants a full content-quality audit that includes E-E-A-T.
+- **"lighthouse" / "pagespeed"** → `seo-lighthouse-audit` (never `seo-technical`).
+
 ### Routing Table
 
-Full mapping of all 44 commands to sub-skill directory names:
+Full mapping of all 52 commands to sub-skill directory names:
 
 | Command | Sub-skill Directory | Status |
 |---------|--------------------|----|
@@ -196,8 +224,16 @@ Full mapping of all 44 commands to sub-skill directory names:
 | `/seo internal-links` | `seo-internal-links/` | active |
 | `/seo local` | `seo-local/` | active |
 | `/seo migration-check` | `seo-migration-check/` | active |
+| `/seo obsidian-kb` | `seo-obsidian-kb/` | active |
 | `/seo llms-txt` | `seo-llms-txt/` | active |
 | `/seo robots-ai` | `seo-robots-ai/` | active |
+| `/seo lighthouse-audit` | `seo-lighthouse-audit/` | active |
+| `/seo core-web-vitals` | `seo-core-web-vitals/` | active |
+| `/seo page-experience` | `seo-page-experience/` | active |
+| `/seo rich-results` | `seo-rich-results/` | active |
+| `/seo ai-optimization` | `seo-ai-optimization/` | active |
+| `/seo eeat-audit` | `seo-eeat-audit/` | active |
+| `/seo helpful-content` | `seo-helpful-content/` | active |
 
 ### Unavailable Command Response
 
@@ -270,7 +306,7 @@ Weighted aggregate of all categories:
 
 ## Sub-Skills
 
-This skill orchestrates 44 specialized sub-skills (44 active):
+This skill orchestrates 52 specialized sub-skills (52 active):
 
 **Active (Phase 1 — Static Analysis):**
 1. **seo-audit** — Full website audit with parallel delegation
@@ -325,10 +361,20 @@ This skill orchestrates 44 specialized sub-skills (44 active):
 40. **seo-internal-links** — Internal link structure audit
 41. **seo-local** — Local SEO audit
 42. **seo-migration-check** — Site migration validator
+43. **seo-obsidian-kb** — Obsidian knowledge base builder from sitemap
 
 **Active (Phase 5 — AI Readability):**
-43. **seo-llms-txt** — llms.txt generation, validation, and audit
-44. **seo-robots-ai** — AI crawler robots.txt audit
+44. **seo-llms-txt** — llms.txt generation, validation, and audit
+45. **seo-robots-ai** — AI crawler robots.txt audit
+
+**Active (Phase 6 — Performance & Quality):**
+46. **seo-lighthouse-audit** — Lighthouse audits with per-audit fixes and Chrome docs
+47. **seo-core-web-vitals** — CWV deep-dive (CrUX field data, LCP subparts, INP/CLS playbooks)
+48. **seo-page-experience** — Google page-experience self-assessment
+49. **seo-rich-results** — Per-type rich result eligibility checker
+50. **seo-ai-optimization** — Google AI Optimization guide audit (AI Overviews / AI Mode readiness)
+51. **seo-eeat-audit** — Standalone E-E-A-T scoring rubric with trust signals
+52. **seo-helpful-content** — Pre-publish people-first content-quality gate
 
 ## Subagents
 

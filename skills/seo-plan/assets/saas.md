@@ -107,7 +107,7 @@ Comparison pages are among the highest-converting content types for SaaS, with c
 - Include structured comparison tables with pricing, features, pros/cons
 - Be factually accurate about competitors — verify claims regularly
 - Include customer testimonials from users who switched
-- Add FAQ schema for common comparison questions (valuable for AI search)
+- Include a visible FAQ section answering common comparison questions (helps users and AI search; do NOT add FAQPage schema markup — rich results are restricted to government/healthcare sites)
 - Update regularly — stale comparison data damages credibility
 - Cross-reference the `seo-competitor-pages` skill for detailed frameworks
 
